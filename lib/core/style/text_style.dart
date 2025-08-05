@@ -30,4 +30,9 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.white,
   );
+  static TextStyle addMealDeatails = GoogleFonts.inter(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.black,
+  );
 }
