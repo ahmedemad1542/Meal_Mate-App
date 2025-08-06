@@ -9,6 +9,7 @@ class TextStyles {
     fontSize: 32.sp,
     fontWeight: FontWeight.w600,
     color: AppColors.white,
+    
   );
   static TextStyle onBoardingDescribtion = GoogleFonts.inter(
     fontSize: 14.sp,
