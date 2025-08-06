@@ -115,7 +115,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             TextButton(
                               onPressed: () {
                                  context.push(AppRoutes.homeScreen);
-                                x   
+                                  
                               },
                               child: Text(
                                 "Let's Start",
