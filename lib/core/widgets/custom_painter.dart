@@ -1,28 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BNBCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
+    Paint paint =
+        Paint()
+          ..color = Colors.white
+          ..style = PaintingStyle.fill;
 
-    Path path = Path()
-      ..moveTo(0, 20)
-      ..quadraticBezierTo(size.width * 0.20, 0, size.width * 0.35, 0)
-      ..arcToPoint(
-        Offset(size.width * 0.65, 0),
-        radius: Radius.circular(40),
-        clockwise: false,
-      )
-      ..quadraticBezierTo(size.width * 0.80, 0, size.width, 20)
-      ..lineTo(size.width, size.height)
-      ..lineTo(0, size.height)
-      ..close();
+    Path path =
+        Path()
+          ..moveTo(0, 0)
+          ..lineTo(size.width * 0.30.w, 0)
+          ..cubicTo(
+            size.width * 0.45.w,
+            0,
+            size.width * 0.42.w,
+            size.height * 0.6.h,
+            size.width * 0.5.w,
+            size.height * 0.6.h,
+          )
+          ..cubicTo(
+            size.width * 0.58.w,
+            size.height * 0.6.h,
+            size.width * 0.55.w,
+            0,
+            size.width * 0.70.w, // بداية متأخرة للكيرف من اليمين
+            0,
+          )
+          ..lineTo(size.width, 0)
+          ..lineTo(size.width, size.height)
+          ..lineTo(0, size.height)
+          ..close();
 
     canvas.drawPath(path, paint);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate)=>false;
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
