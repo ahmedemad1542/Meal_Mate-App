@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meal_mate/core/style/text_style.dart';
+import 'package:meal_mate/core/utils/text_style.dart';
 
 class CustomTextfield extends StatelessWidget {
 
