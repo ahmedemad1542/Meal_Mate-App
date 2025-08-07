@@ -17,6 +17,7 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController();
   double currentPage = 0;
+  
 
   void _nextPage() {
     if (currentPage < onboardingPages.length - 1) {

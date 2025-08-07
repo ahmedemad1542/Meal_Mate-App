@@ -1,19 +1,26 @@
 import 'package:go_router/go_router.dart';
 import 'package:meal_mate/core/routing/app_routes.dart';
-import 'package:meal_mate/features/add_meal/view/home_screen/home_screen.dart';
+import 'package:meal_mate/features/home_screen/home_screen.dart';
 import 'package:meal_mate/features/add_meal/view/add_meal.dart';
 import 'package:meal_mate/features/onBoarding/view/on_boarding.dart';
+import 'package:meal_mate/features/splash_screen/splash_screen.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
     //initialization
-    initialLocation: AppRoutes.onBoarding,
-    routes: [
+    initialLocation: AppRoutes.splashScreen ,
+        routes: [
       GoRoute(
         path: AppRoutes.onBoarding,
         name: AppRoutes.onBoarding,
         builder: (context, state) => const OnBoardingScreen(),
       ),
+        GoRoute(
+        path: AppRoutes.splashScreen,
+        name: AppRoutes.splashScreen,
+        builder: (context, state) => const SplashScreen(),
+      ),
+
 
       GoRoute(
         path: AppRoutes.homeScreen,
