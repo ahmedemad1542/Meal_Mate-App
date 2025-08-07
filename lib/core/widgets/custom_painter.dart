@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BNBCustomPainter extends CustomPainter {
   @override
@@ -12,22 +11,22 @@ class BNBCustomPainter extends CustomPainter {
     Path path =
         Path()
           ..moveTo(0, 0)
-          ..lineTo(size.width * 0.30.w, 0)
+          ..lineTo(size.width * 0.28, 0)
           ..cubicTo(
-            size.width * 0.45.w,
-            0,
-            size.width * 0.42.w,
-            size.height * 0.6.h,
-            size.width * 0.5.w,
-            size.height * 0.6.h,
+            size.width * 0.42,
+            0, // نقطة تحكم أولى (للانسيابية من البداية)
+            size.width * 0.42,
+            size.height * 0.6, // نقطة تحكم ثانية (عمق الكيرف)
+            size.width * 0.5,
+            size.height * 0.6, // منتصف الكيرف
           )
           ..cubicTo(
-            size.width * 0.58.w,
-            size.height * 0.6.h,
-            size.width * 0.55.w,
-            0,
-            size.width * 0.70.w, // بداية متأخرة للكيرف من اليمين
-            0,
+            size.width * 0.58,
+            size.height * 0.6, // نقطة تحكم ثالثة (بعد النص)
+            size.width * 0.58,
+            0, // نقطة تحكم رابعة (للرجوع بانسيابية)
+            size.width * 0.70,
+            0, // نهاية الكيرف
           )
           ..lineTo(size.width, 0)
           ..lineTo(size.width, size.height)
