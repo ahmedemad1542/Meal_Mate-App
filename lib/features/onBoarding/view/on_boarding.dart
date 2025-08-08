@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_mate/core/routing/app_routes.dart';
-import 'package:meal_mate/core/style/app_colors.dart';
-import 'package:meal_mate/core/style/text_style.dart';
+import 'package:meal_mate/core/utils/app_colors.dart';
+import 'package:meal_mate/core/utils/text_style.dart';
 import 'package:meal_mate/features/onBoarding/data/onboarding_data.dart';
 
 class OnBoardingScreen extends StatefulWidget {

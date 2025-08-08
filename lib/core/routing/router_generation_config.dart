@@ -25,7 +25,7 @@ class RouterGenerationConfig {
       GoRoute(
         path: AppRoutes.homeScreen,
         name: AppRoutes.homeScreen,
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) =>  HomeScreen(),
       ),
 
       GoRoute(

@@ -8,4 +8,12 @@ class AppAssets {
   static const String on3 = '${imagePath}on3.jpg';
 
   static const String logo = '${imagePath}logo.png';
+
+  static const String ai = '${imagePath}ai.svg';
+
+  static const String home = '${imagePath}home.png';
+
+  static const String star = '${imagePath}star.svg';
+  
+  static const String clock = '${imagePath}clock.svg';
 }
