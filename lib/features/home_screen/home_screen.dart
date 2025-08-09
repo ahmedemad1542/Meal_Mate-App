@@ -50,37 +50,39 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
-      body: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
 
-            child: Image.asset(
-              AppAssets.home,
-              fit: BoxFit.cover,
-              height: 230.h,
+              child: Image.asset(
+                AppAssets.home,
+                fit: BoxFit.cover,
+                height: 230.h,
+              ),
             ),
-          ),
-          GridView.builder(
-            padding: EdgeInsets.all(16),
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 2, 
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, 
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-              childAspectRatio: 160 / 210, 
+            GridView.builder(
+              padding: EdgeInsets.all(16),
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 2,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+                childAspectRatio: 160 / 210,
+              ),
+              itemBuilder: (context, index) => const MealCard(),
             ),
-            itemBuilder: (context, index) => const MealCard(),
-          ),
-          Expanded(
-            child: IndexedStack(
-              index: _currentIndex,
-              children: _items.map((e) => e.page).toList(),
+            Expanded(
+              child: IndexedStack(
+                index: _currentIndex,
+                children: _items.map((e) => e.page).toList(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: Stack(
         clipBehavior: Clip.none,
