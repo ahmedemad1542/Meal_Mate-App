@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_mate/core/routing/app_routes.dart';
-import 'package:meal_mate/core/utils/app_assets.dart';
+import 'package:meal_mate/core/theming/app_assets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {

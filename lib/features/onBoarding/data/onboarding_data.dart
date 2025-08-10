@@ -1,4 +1,4 @@
-import 'package:meal_mate/core/utils/app_assets.dart';
+import 'package:meal_mate/core/theming/app_assets.dart';
 import 'package:meal_mate/features/onBoarding/model/onBoarding_model.dart';
 
 final List<OnBoardingModel> onboardingPages = [

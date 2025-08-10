@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meal_mate/core/utils/app_assets.dart';
-import 'package:meal_mate/core/utils/text_style.dart';
+import 'package:meal_mate/core/theming/app_assets.dart';
+import 'package:meal_mate/core/theming/text_style.dart';
 
 class MealCard extends StatelessWidget {
   const MealCard({super.key});
