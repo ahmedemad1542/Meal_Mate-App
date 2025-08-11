@@ -44,3 +44,5 @@ class MealCard extends StatelessWidget {
     );
   }
 }
+//Todo
+//fix meal card according to figma design
