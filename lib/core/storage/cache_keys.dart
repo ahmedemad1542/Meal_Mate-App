@@ -1,3 +1,3 @@
-abstract class Storagekeys {
+abstract class CacheKeys {
   static  String firstTime = 'firstTime';
 }

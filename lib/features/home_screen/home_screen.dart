@@ -47,38 +47,36 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
-      body: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: Image.asset(
-              AppAssets.home,
-              fit: BoxFit.cover,
-              height: 230.h,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Image.asset(
+                AppAssets.home,
+                fit: BoxFit.cover,
+                height: 230.h,
+              ),
             ),
-          ),
-          SingleChildScrollView(
-            child: GridView.builder(
+            GridView.builder(
               padding: EdgeInsets.all(16),
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: 2,
+              itemCount: 10,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
+                mainAxisSpacing: 44,
+                crossAxisSpacing: 30,
                 childAspectRatio: 160 / 210,
               ),
               itemBuilder: (context, index) => const MealCard(),
             ),
-          ),
-          Expanded(
-            child: IndexedStack(
+            IndexedStack(
               index: _currentIndex,
               children: _items.map((e) => e.page).toList(),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
