@@ -33,7 +33,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
           //floating center button
           Positioned(
-            top: -14.h,
+            top: -10.h,
             child: GestureDetector(
               onTap: onCenterButtonTap,
               child: Container(
@@ -41,7 +41,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 width: 65.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.black,
+                  color: AppColors.white,
                   boxShadow: [
                     BoxShadow(color: Colors.black26, blurRadius: 5.r),
                   ],
