@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
+import 'package:meal_mate/features/add_meal/view/add_meal.dart';
 import 'package:meal_mate/features/home_screen/custom_navigaton_bar/model/bottom_nav_items.dart';
 import 'package:meal_mate/features/home_screen/home_screen.dart';
 import 'package:meal_mate/features/home_screen/widgets/custom_nav_bar.dart';
@@ -16,14 +17,14 @@ class _BaseScreenState extends State<BaseScreen> {
 
   final List<BottomNavItems> _items = [
     BottomNavItems(
-      page:const HomeScreen(),
+      page: const HomeScreen(),
       iconWidget: Icon(Icons.home),
       label: 'Home',
     ),
     BottomNavItems(
-      page: Center(child: Text('Offers')),
+      page: const AddMealScreen(),
       iconWidget: Icon(Icons.local_fire_department),
-      label: 'Offers',
+      label: 'Add',
     ),
     BottomNavItems(
       page: Center(child: Text('Center')),
@@ -45,7 +46,6 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.orange,
       body: IndexedStack(
         index: _currentIndex,
         children: _items.map((e) => e.page).toList(),
@@ -63,7 +63,7 @@ class _BaseScreenState extends State<BaseScreen> {
             _currentIndex = 2;
           });
         },
-     ),
-);
-}
+      ),
+    );
+  }
 }

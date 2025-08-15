@@ -9,31 +9,35 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: Image.asset(
-              AppAssets.home,
-              fit: BoxFit.cover,
-              height: 230.h,
+    return Scaffold(
+      floatingActionButton: (onPressed),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Image.asset(
+                AppAssets.home,
+                fit: BoxFit.cover,
+                height: 230.
+                ,
+              ),
             ),
-          ),
-          GridView.builder(
-            padding: const EdgeInsets.all(16),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 10,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 44,
-              crossAxisSpacing: 30,
-              childAspectRatio: 160 / 210,
+            GridView.builder(
+              padding: const EdgeInsets.all(16),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 10,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 44,
+                crossAxisSpacing: 30,
+                childAspectRatio: 160 / 210,
+              ),
+              itemBuilder: (context, index) => const MealCard(),
             ),
-            itemBuilder: (context, index) => const MealCard(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

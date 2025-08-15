@@ -30,7 +30,7 @@ class RouterGenerationConfig {
       GoRoute(
         path: AppRoutes.addMeal,
         name: AppRoutes.addMeal,
-        builder: (context, state) => const AddMeal(),
+        builder: (context, state) => const AddMealScreen(),
       ),
     ],
   );

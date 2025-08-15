@@ -10,25 +10,25 @@ class BNBCustomPainter extends CustomPainter {
 
     Path path =
         Path()
-          ..moveTo(0, 0)
-          ..lineTo(size.width * 0.28, 0)
+          ..moveTo(0, -10)
+          ..lineTo(size.width * 0.28, -10)
           ..cubicTo(
             size.width * 0.42,
-            0, // نقطة تحكم أولى (للانسيابية من البداية)
+            -10, // نقطة تحكم أولى (للانسيابية من البداية)
             size.width * 0.42,
-            size.height * 0.6, // نقطة تحكم ثانية (عمق الكيرف)
+            size.height * 0.6 - 10, // نقطة تحكم ثانية (عمق الكيرف)
             size.width * 0.5,
-            size.height * 0.6, // منتصف الكيرف
+            size.height * 0.6 - 10, // منتصف الكيرف
           )
           ..cubicTo(
             size.width * 0.58,
-            size.height * 0.6, // نقطة تحكم ثالثة (بعد النص)
+            size.height * 0.6 - 10, // نقطة تحكم ثالثة (بعد النص)
             size.width * 0.58,
-            0, // نقطة تحكم رابعة (للرجوع بانسيابية)
+            -10, // نقطة تحكم رابعة (للرجوع بانسيابية)
             size.width * 0.70,
-            0, // نهاية الكيرف
+            -10, // نهاية الكيرف
           )
-          ..lineTo(size.width, 0)
+          ..lineTo(size.width, -10)
           ..lineTo(size.width, size.height)
           ..lineTo(0, size.height)
           ..close();

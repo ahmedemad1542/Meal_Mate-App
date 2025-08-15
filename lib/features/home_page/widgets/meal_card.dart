@@ -9,7 +9,7 @@ import 'package:meal_mate/core/theming/text_style.dart';
 class MealCard extends StatelessWidget {
   final String name;
   final int cookingTime;
-  final String? imagePath; // الصورة ممكن تكون null لو مفيش
+  final String? imagePath; 
 
   const MealCard({
     super.key,
@@ -60,7 +60,7 @@ class MealCard extends StatelessWidget {
                   children: [
                     SvgPicture.asset(AppAssets.star),
                     SizedBox(width: 5.w),
-                    Text('4.9'), // ممكن نخليها ديناميكية لو عندنا تقييم
+                    Text(cookingTime.toString()), 
                   ],
                 ),
                 Row(

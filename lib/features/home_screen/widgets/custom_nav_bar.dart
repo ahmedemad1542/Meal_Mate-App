@@ -101,7 +101,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 showUnselectedLabels: true,
                 selectedLabelStyle: const TextStyle(color: AppColors.black),
                 unselectedLabelStyle: const TextStyle(color: Colors.black45),
-                type: BottomNavigationBarType.fixed,
+                type: BottomNavigationBarType.fixed
               ),
             ),
           ),

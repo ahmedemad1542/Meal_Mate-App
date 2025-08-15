@@ -1,4 +1,5 @@
-import 'package:meal_mate/features/add_meal/model/meal_model.dart';
+
+import 'package:meal_mate/features/home_screen/model/meal_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:flutter/foundation.dart';

@@ -3,12 +3,14 @@ class MealModel {
   final String name;
   final int cookingTime;
   final String describtion;
+  final String? imagePath;
 
   MealModel({
     this.id,
     required this.name,
     required this.cookingTime,
     required this.describtion,
+    this.imagePath
   });
 
   Map<String, dynamic> toMap() {
@@ -17,6 +19,7 @@ class MealModel {
       'name': name,
       'cookingTime': cookingTime,
       'describtion': describtion,
+      'imagePath' : imagePath,
     };
   }
 
@@ -26,6 +29,7 @@ class MealModel {
       name: map['name'],
       cookingTime: map['cookingTime'],
       describtion: map['describtion'],
+      imagePath :  map['imagePath']
     );
   }
 }
