@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meal_mate/features/home_screen/model/meal_model.dart';
+import 'package:meal_mate/core/model/meal_model.dart';
 
 class AddMealScreen extends StatefulWidget {
   const AddMealScreen({super.key});

@@ -10,7 +10,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: (onPressed),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/addMeal');
+        },backgroundColor:,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -19,8 +23,7 @@ class HomeScreen extends StatelessWidget {
               child: Image.asset(
                 AppAssets.home,
                 fit: BoxFit.cover,
-                height: 230.
-                ,
+                height: 230.h,
               ),
             ),
             GridView.builder(
