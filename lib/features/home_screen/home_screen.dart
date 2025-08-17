@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/core/theming/app_assets.dart';
 import 'package:meal_mate/core/widgets/meal_card.dart';
+import 'package:meal_mate/features/home_screen/widgets/welcome_image_home.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,15 +19,8 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: double.infinity,
-              child: Image.asset(
-                AppAssets.home,
-                fit: BoxFit.cover,
-                height: 230.h,
-              ),
-            ),
-            GridView.builder(
+           const WelcomeImageHome()
+            ,GridView.builder(
               padding: const EdgeInsets.all(16),
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
