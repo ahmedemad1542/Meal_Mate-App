@@ -6,11 +6,18 @@ class DioHelper {
   static final DioHelper _dioHelper = DioHelper._internal();
   factory DioHelper() => _dioHelper;
 
-  final Dio dio = Dio(
-    BaseOptions(
-      baseUrl: ApiEndpoints.getAllUsers
-    )
-  );
+  final Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.getAllUsers));
   //GET
-  get({required String endpoint, required})
+  Future<Response<dynamic>> getRequest(
+    String endpoint, {
+    Map<String, dynamic>? query,
+    Options? options,
+  }) async {
+    final response = await dio.get(
+      endpoint,
+      queryParameters: query,
+      options: options,
+    );
+    return  response;
+  }
 }

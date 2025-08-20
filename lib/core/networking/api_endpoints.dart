@@ -1,4 +1,4 @@
 class ApiEndpoints {
-  static const String baseUrl = '';
-  static const String getAllUsers = 'https://dummyjson.com/users';
+  static const String baseUrl = 'https://dummyjson.com/';
+  static const String getAllUsers = 'users';
 }
