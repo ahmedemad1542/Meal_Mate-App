@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/core/theming/app_assets.dart';
 
@@ -44,3 +44,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+*/
