@@ -4,12 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class TextStyles {
-
-  static TextStyle  onBoardingTitle = GoogleFonts.inter(
+  static TextStyle onBoardingTitle = GoogleFonts.inter(
     fontSize: 32.sp,
     fontWeight: FontWeight.w600,
     color: AppColors.white,
-    
   );
   static TextStyle onBoardingDescribtion = GoogleFonts.inter(
     fontSize: 14.sp,
@@ -26,7 +24,7 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     color: AppColors.white,
   );
-  static TextStyle skipAndNext = GoogleFonts.inter(
+  static TextStyle w600size14 = GoogleFonts.inter(
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
     color: AppColors.white,

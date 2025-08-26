@@ -17,7 +17,6 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController();
   double currentPage = 0;
-  
 
   void _nextPage() {
     if (currentPage < onboardingPages.length - 1) {
@@ -108,28 +107,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 onPressed: _prevPage,
                                 child: Text(
                                   "Prev",
-                                  style: TextStyles.skipAndNext,
+                                  style: TextStyles.w600size14,
                                 ),
                               ),
 
                           if (currentPage == onboardingPages.length - 1)
                             TextButton(
                               onPressed: () {
-                                 context.push(AppRoutes.homeScreen);
-                                  
+                                context.push(AppRoutes.homeScreen);
                               },
                               child: Text(
                                 "Let's Start",
-                                style: TextStyles.skipAndNext,
+                                style: TextStyles.w600size14,
                               ),
                             )
                           else
                             TextButton(
                               onPressed: _nextPage,
-                              child: Text(
-                                "Next",
-                                style: TextStyles.skipAndNext,
-                              ),
+                              child: Text("Next", style: TextStyles.w600size14),
                             ),
                         ],
                       ),
