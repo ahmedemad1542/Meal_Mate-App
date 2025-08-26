@@ -4,9 +4,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:meal_mate/core/theming/app_assets.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
 import 'package:meal_mate/core/theming/text_style.dart';
+import 'package:meal_mate/core/model/meal_model.dart';
 
 class MealCard extends StatelessWidget {
-  const MealCard({super.key});
+  final MealModel meal;
+
+  const MealCard({super.key, required this.meal});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class MealCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: AppColors.black.withOpacity(0.04),
-            offset: Offset(6, 6),
+            offset: const Offset(6, 6),
             blurRadius: 69,
           ),
         ],
@@ -34,13 +37,14 @@ class MealCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.r),
                 image: DecorationImage(
-                  image: AssetImage(AppAssets.on3),
+                  
+                  image: const AssetImage(AppAssets.on3),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          Text('Pasta', style: TextStyles.addMealDeatails),
+          Text(meal.name, style: TextStyles.addMealDeatails),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -50,14 +54,14 @@ class MealCard extends StatelessWidget {
                   children: [
                     SvgPicture.asset(AppAssets.star),
                     SizedBox(width: 5.w),
-                    Text('4.9'),
+                    const Text('4.9'), 
                   ],
                 ),
                 Row(
                   children: [
                     SvgPicture.asset(AppAssets.clock),
                     SizedBox(width: 5.w),
-                    Text('20-30'),
+                    Text("${meal.cookingTime} min"),
                   ],
                 ),
               ],

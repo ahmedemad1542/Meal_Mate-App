@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
-import 'package:meal_mate/features/add_meal/view/add_meal_screen.dart';
+import 'package:meal_mate/features/meals/add_meal/view/add_meal_screen.dart';
 import 'package:meal_mate/features/home_screen/custom_navigaton_bar/model/bottom_nav_items.dart';
 import 'package:meal_mate/features/home_screen/home_screen.dart';
 import 'package:meal_mate/features/home_screen/widgets/custom_nav_bar.dart';

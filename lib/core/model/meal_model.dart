@@ -1,35 +1,46 @@
-class MealModel {
-  final int? id;
+import 'package:hive/hive.dart';
+part 'meal_model.g.dart';
+
+@HiveType(typeId: 0)
+class MealModel extends HiveObject {
+  @HiveField(0)
   final String name;
+
+  @HiveField(1)
   final int cookingTime;
+
+  @HiveField(2)
   final String describtion;
+
+  @HiveField(3)
   final String? imagePath;
 
+  @HiveField(4)
+  int? id;
+
   MealModel({
-    this.id,
     required this.name,
     required this.cookingTime,
     required this.describtion,
-    this.imagePath
+    this.imagePath,
+    this.id,
   });
-
-  Map<String, dynamic> toMap() {
+    Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'name': name,
       'cookingTime': cookingTime,
       'describtion': describtion,
-      'imagePath' : imagePath,
+      'imagePath': imagePath,
+      'id': id,
     };
   }
-
   factory MealModel.fromMap(Map<String, dynamic> map) {
     return MealModel(
-      id: map['id'],
       name: map['name'],
       cookingTime: map['cookingTime'],
       describtion: map['describtion'],
-      imagePath :  map['imagePath']
+      imagePath: map['imagePath'],
+      id: map['id'],
     );
   }
 }
