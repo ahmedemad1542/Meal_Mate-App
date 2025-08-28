@@ -5,7 +5,7 @@ import 'package:meal_mate/core/routing/app_routes.dart';
 import 'package:meal_mate/features/home_screen/base_screen.dart';
 import 'package:meal_mate/features/meals/add_meal/manager/cubit/add_meal_cubit.dart';
 import 'package:meal_mate/features/meals/add_meal/view/add_meal_screen.dart';
-import 'package:meal_mate/features/meals/data/repo/local_meals_repo.dart';
+import 'package:meal_mate/core/data/repo/local_meals_repo.dart';
 import 'package:meal_mate/features/meals/meal_details/view/meal_details.dart';
 import 'package:meal_mate/features/meals/update_meal/manager/cubit/update_meal_cubit.dart';
 import 'package:meal_mate/features/meals/update_meal/view/update_meal_screen.dart';

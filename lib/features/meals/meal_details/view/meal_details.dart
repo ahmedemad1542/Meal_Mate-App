@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_mate/core/model/meal_model.dart';
 
-
 class MealDetailsScreen extends StatelessWidget {
   final MealModel meal;
   final int mealKey;
@@ -20,10 +19,7 @@ class MealDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           meal.name,
-          style: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         leading: IconButton(
@@ -63,9 +59,9 @@ class MealDetailsScreen extends StatelessWidget {
                   color: Colors.grey[600],
                 ),
               ),
-            
+
             SizedBox(height: 24.h),
-            
+
             // Meal Name
             Text(
               meal.name,
@@ -75,9 +71,9 @@ class MealDetailsScreen extends StatelessWidget {
                 color: Colors.black87,
               ),
             ),
-            
+
             SizedBox(height: 12.h),
-            
+
             // Cooking Time
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
@@ -89,11 +85,7 @@ class MealDetailsScreen extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.access_time,
-                    color: Colors.orange,
-                    size: 18.sp,
-                  ),
+                  Icon(Icons.access_time, color: Colors.orange, size: 18.sp),
                   SizedBox(width: 6.w),
                   Text(
                     '${meal.cookingTime} minutes',
@@ -106,9 +98,9 @@ class MealDetailsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             SizedBox(height: 24.h),
-            
+
             // Description Title
             Text(
               'Description',
@@ -118,9 +110,9 @@ class MealDetailsScreen extends StatelessWidget {
                 color: Colors.black87,
               ),
             ),
-            
+
             SizedBox(height: 12.h),
-            
+
             // Description Content
             Expanded(
               child: Container(
@@ -133,7 +125,7 @@ class MealDetailsScreen extends StatelessWidget {
                 ),
                 child: SingleChildScrollView(
                   child: Text(
-                    meal.describtion,
+                    meal.description,
                     style: TextStyle(
                       fontSize: 16.sp,
                       color: Colors.grey[700],
@@ -143,7 +135,7 @@ class MealDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             SizedBox(height: 20.h),
           ],
         ),

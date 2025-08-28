@@ -9,7 +9,7 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.white,
   );
-  static TextStyle onBoardingDescribtion = GoogleFonts.inter(
+  static TextStyle onBoardingDescription = GoogleFonts.inter(
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     color: AppColors.white,
@@ -19,7 +19,7 @@ class TextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.white,
   );
-  static TextStyle yourFoodDescribtion = GoogleFonts.inter(
+  static TextStyle yourFoodDescription = GoogleFonts.inter(
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     color: AppColors.white,

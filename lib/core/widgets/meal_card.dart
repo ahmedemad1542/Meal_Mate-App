@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -61,8 +63,8 @@ class MealCard extends StatelessWidget {
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(12.r),
                             ),
-                            child: Image.network(
-                              meal.imagePath!,
+                            child: Image.file(
+                              File(meal.imagePath!),
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return _buildPlaceholderImage();

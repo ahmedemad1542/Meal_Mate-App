@@ -76,7 +76,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       Spacer(),
                       Text(
                         page.description,
-                        style: TextStyles.onBoardingDescribtion,
+                        style: TextStyles.onBoardingDescription,
                         textAlign: TextAlign.center,
                       ),
                       Spacer(),

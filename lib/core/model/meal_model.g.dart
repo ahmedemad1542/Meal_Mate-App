@@ -19,7 +19,7 @@ class MealModelAdapter extends TypeAdapter<MealModel> {
     return MealModel(
       name: fields[0] as String,
       cookingTime: fields[1] as int,
-      describtion: fields[2] as String,
+      description: fields[2] as String,
       imagePath: fields[3] as String?,
       id: fields[4] as int?,
       rating: fields[5] as double,
@@ -35,7 +35,7 @@ class MealModelAdapter extends TypeAdapter<MealModel> {
       ..writeByte(1)
       ..write(obj.cookingTime)
       ..writeByte(2)
-      ..write(obj.describtion)
+      ..write(obj.description)
       ..writeByte(3)
       ..write(obj.imagePath)
       ..writeByte(4)

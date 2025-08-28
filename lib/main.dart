@@ -7,7 +7,7 @@ import 'package:meal_mate/core/model/meal_model.dart';
 import 'package:meal_mate/core/routing/router_generation_config.dart';
 import 'package:meal_mate/features/meals/add_meal/manager/cubit/add_meal_cubit.dart';
 
-import 'package:meal_mate/features/meals/data/repo/local_meals_repo.dart';
+import 'package:meal_mate/core/data/repo/local_meals_repo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
