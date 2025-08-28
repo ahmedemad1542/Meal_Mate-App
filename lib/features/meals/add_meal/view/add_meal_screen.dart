@@ -9,13 +9,15 @@ import 'package:meal_mate/features/meals/add_meal/manager/cubit/add_meal_cubit.d
 import 'package:meal_mate/features/meals/add_meal/manager/cubit/add_meal_states.dart';
 import 'package:meal_mate/features/meals/add_meal/view/widgets/add_meal_list_fields.dart';
 import 'package:meal_mate/features/meals/add_meal/view/widgets/custom_appbar.dart';
-import 'package:meal_mate/features/meals/add_meal/view/widgets/custom_textform.dart';
 
+
+// في AddMealScreen
 class AddMealScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _mealNameController = TextEditingController();
   final TextEditingController _cookingTimeController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _ratingController = TextEditingController();
 
   AddMealScreen({super.key});
 
@@ -48,37 +50,45 @@ class AddMealScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 30.h),
-                 AddMealListFields(),
+                  AddMealListFields(
+                    mealNameController: _mealNameController,
+                    cookingTimeController: _cookingTimeController,
+                    descriptionController: _descriptionController,
+                    ratingController: _ratingController,
+                  ),
                   SizedBox(height: 40.h),
                   SizedBox(
                     width: double.infinity,
                     height: 50.h,
-                    child:
-                        state is AddMealLoadingState
-                            ? const Center(child: CircularProgressIndicator())
-                            : ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  final meal = MealModel(
-                                    name: _mealNameController.text.trim(),
-                                    cookingTime: int.parse(
-                                      _cookingTimeController.text,
-                                    ),
-                                    describtion:
-                                        _descriptionController.text.trim(),
-                                  );
-                                  context.read<AddMealCubit>().addMeal(meal);
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.orange,
-                                minimumSize: Size(327.w, 52.h),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
+                    child: state is AddMealLoadingState
+                        ? const Center(child: CircularProgressIndicator())
+                        : ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                final meal = MealModel(
+                                  name: _mealNameController.text.trim(),
+                                  cookingTime: int.parse(
+                                    _cookingTimeController.text.trim(),
+                                  ),
+                                  describtion:
+                                      _descriptionController.text.trim(),
+                                  rating: double.tryParse(
+                                        _ratingController.text.trim(),
+                                      ) ??
+                                      0.0,
+                                );
+                                context.read<AddMealCubit>().addMeal(meal);
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.orange,
+                              minimumSize: Size(327.w, 52.h),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100),
                               ),
-                              child: Text('Save', style: TextStyles.w600size14),
                             ),
+                            child: Text('Save', style: TextStyles.w600size14),
+                          ),
                   ),
                 ],
               ),

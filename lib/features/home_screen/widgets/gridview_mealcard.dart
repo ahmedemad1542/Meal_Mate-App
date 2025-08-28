@@ -14,6 +14,7 @@ class GridviewMealcard extends StatelessWidget {
       valueListenable: mealsBox.listenable(),
       builder: (context, Box<MealModel> box, _) {
         final meals = box.values.toList();
+        final keys = box.keys.toList();
 
         if (meals.isEmpty) {
           return const Center(child: Text("No meals yet"));
@@ -31,7 +32,10 @@ class GridviewMealcard extends StatelessWidget {
             childAspectRatio: 160 / 210,
           ),
           itemBuilder: (context, index) {
-            return MealCard(meal: meals[index]);
+            return MealCard(
+              meal: meals[index],
+              mealKey: keys[index] as int, 
+            );
           },
         );
       },

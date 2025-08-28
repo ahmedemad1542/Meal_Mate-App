@@ -18,14 +18,18 @@ class MealModel extends HiveObject {
   @HiveField(4)
   int? id;
 
+  @HiveField(5)
+  final double rating;
+
   MealModel({
     required this.name,
     required this.cookingTime,
     required this.describtion,
     this.imagePath,
     this.id,
+    required this.rating,
   });
-    Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'name': name,
       'cookingTime': cookingTime,
@@ -34,6 +38,7 @@ class MealModel extends HiveObject {
       'id': id,
     };
   }
+
   factory MealModel.fromMap(Map<String, dynamic> map) {
     return MealModel(
       name: map['name'],
@@ -41,6 +46,7 @@ class MealModel extends HiveObject {
       describtion: map['describtion'],
       imagePath: map['imagePath'],
       id: map['id'],
+      rating: map['rating'] ?? 0.0,
     );
   }
 }
