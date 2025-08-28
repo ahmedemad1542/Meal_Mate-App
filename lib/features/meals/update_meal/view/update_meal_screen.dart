@@ -24,6 +24,8 @@ class UpdateMealScreen extends StatelessWidget {
       TextEditingController(text: meal.cookingTime.toString());
   late final TextEditingController _descriptionController = 
       TextEditingController(text: meal.describtion);
+  late final TextEditingController _ratingController = 
+      TextEditingController(text: meal.rating.toString());
 
   @override
   Widget build(BuildContext context) {
@@ -131,6 +133,8 @@ class UpdateMealScreen extends StatelessWidget {
                     validator: (value) =>
                         value == null || value.isEmpty ? "Enter description" : null,
                   ),
+                  SizedBox(height: 16.h),
+                  CustomTextFormField(label: 'Rating', controller: _ratingController, keyboardType: TextInputType.number,),
                   
                   SizedBox(height: 32.h),
                   
@@ -185,7 +189,7 @@ class UpdateMealScreen extends StatelessWidget {
                                       cookingTime: int.parse(_cookingTimeController.text),
                                       describtion: _descriptionController.text.trim(),
                                       imagePath: meal.imagePath,
-                                      rating:  meal.rating,
+                                      rating:  double.tryParse(_ratingController.text) ?? meal.rating,
                                     );
                                     
                                     context.read<UpdateMealCubit>().updateMealByKey(

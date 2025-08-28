@@ -105,26 +105,20 @@ class MealCard extends StatelessWidget {
                             child: Text(
                               '${meal.cookingTime} min',
                               style: TextStyle(
-                                fontSize: 12.sp,
+                                fontSize: 14.sp,
                                 color: Colors.grey[600],
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      Row(
-                        children: [
                           SvgPicture.asset(AppAssets.star),
                           SizedBox(width: 4.w),
-                          Expanded(
-                            child: Text(
-                              meal.rating.toString(),
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: Colors.grey[600],
-                                fontWeight: FontWeight.w500,
-                              ),
+                          Text(
+                            meal.rating.toString(),
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ],
