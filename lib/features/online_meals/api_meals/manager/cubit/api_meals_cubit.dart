@@ -6,8 +6,8 @@ class ApiMealCubit extends Cubit<ApiMealState> {
   final ApiMealsRepo apiMealsRepo;
   ApiMealCubit(this.apiMealsRepo) : super(ApiMealInitial());
 
-  Future<void> getMealsByCategory(String category) async {
-    if (state is ApiMealLoaded) return;
+  Future<void> getMealsByCategory(String category, {bool forceRefresh = false}) async {
+    if (state is ApiMealLoaded && !forceRefresh) return;
     emit(ApiMealLoading());
     try {
       final data = await apiMealsRepo.fetchMealsByCategory(category);
@@ -17,7 +17,8 @@ class ApiMealCubit extends Cubit<ApiMealState> {
     }
   }
 
-  Future<void> getMealsByArea(String area) async {
+  Future<void> getMealsByArea(String area, {bool forceRefresh = false}) async {
+    if (state is ApiMealLoaded && !forceRefresh) return;
     emit(ApiMealLoading());
     try {
       final data = await apiMealsRepo.fetchMealsByArea(area);

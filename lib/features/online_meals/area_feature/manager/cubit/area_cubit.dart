@@ -6,8 +6,8 @@ class AreaCubit extends Cubit<AreaState> {
   final AreaRepo areaRepo;
   AreaCubit(this.areaRepo) : super(AreaInitial());
 
-  Future<void> getAreas() async {
-    if (state is AreaLoaded) return; // prevent re-fetch
+  Future<void> getAreas({bool forceRefresh = false}) async {
+    if (state is AreaLoaded && !forceRefresh) return; // prevent re-fetch
     emit(AreaLoading());
     try {
       final data = await areaRepo.fetchAreas();

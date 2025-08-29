@@ -16,24 +16,33 @@ class AreasScreen extends StatelessWidget {
         if (state is AreaLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is AreaLoaded) {
-          return GridView.builder(
-            padding: const EdgeInsets.all(12),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-            ),
-            itemCount: state.areas.length,
-            itemBuilder: (context, index) {
-              final area = state.areas[index];
-              return GestureDetector(onTap: () {
-                context.pushNamed(AppRoutes.categoryMealsScreen, extra: area.name);
-              },
-                child: Card(
-                  child: Center(child: Text(area.name)),
-                ),
-              );
+          return RefreshIndicator(
+            onRefresh: () async {
+              await context.read<AreaCubit>().getAreas(forceRefresh: true);
             },
+            child: GridView.builder(
+              padding: const EdgeInsets.all(12),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+              ),
+              itemCount: state.areas.length,
+              itemBuilder: (context, index) {
+                final area = state.areas[index];
+                return GestureDetector(
+                  onTap: () {
+                    context.pushNamed(
+                      AppRoutes.categoryMealsScreen,
+                      extra: area.name,
+                    );
+                  },
+                  child: Card(
+                    child: Center(child: Text(area.name)),
+                  ),
+                );
+              },
+            ),
           );
         } else if (state is AreaError) {
           return Center(child: Text(state.message));
