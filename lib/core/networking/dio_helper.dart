@@ -1,36 +1,24 @@
 import 'package:dio/dio.dart';
-import 'package:meal_mate/core/networking/api_endpoints.dart';
-import 'package:meal_mate/core/storage/cache_data.dart';
+import 'api_endpoints.dart';
 
 class DioHelper {
   DioHelper._internal();
   static final DioHelper _dioHelper = DioHelper._internal();
   factory DioHelper() => _dioHelper;
 
-  Dio dio = Dio(
+  final Dio dio = Dio(
     BaseOptions(
-      baseUrl: ApiEndpoints.getAllUsers,
-      connectTimeout: Duration(seconds: 30),
-      sendTimeout: Duration(seconds: 10),
-      receiveTimeout: Duration(seconds: 15),
+      baseUrl: ApiEndpoints.baseUrl,
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 15),
     ),
   );
 
-  //GET
-  Future<Response<dynamic>> getRequest(
+  Future<Response> getRequest(
     String endpoint, {
-    Map<String, dynamic>? data,
-    bool isFormData = true,
-    bool isAuthorized = true,
+    Map<String, dynamic>? query,
   }) async {
-    final response = await dio.get(
-      endpoint,
-      data: isFormData ? FormData.fromMap(data ?? {}) : data,
-      options: Options(
-        headers: {
-         if (isAuthorized) "Autorization": "Bearer ${CacheData.accessToken} "},
-      ),
-    );
+    final response = await dio.get(endpoint, queryParameters: query);
     return response;
   }
 }

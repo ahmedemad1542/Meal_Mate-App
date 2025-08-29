@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -34,17 +36,20 @@ class MealDetailsScreen extends StatelessWidget {
           children: [
             // Meal Image (if available)
             if (meal.imagePath != null)
-              Container(
-                height: 200.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  image: DecorationImage(
-                    image: NetworkImage(meal.imagePath!),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              )
+    Container(
+      height: 200.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.r),
+        image: DecorationImage(
+          image: FileImage(File(meal.imagePath!)), // 👈 بدل NetworkImage
+          fit: BoxFit.cover,
+          onError: (error, stackTrace) {
+            // Placeholder في حالة الصورة مش موجودة
+          },
+        ),
+      ),
+    )
             else
               Container(
                 height: 200.h,

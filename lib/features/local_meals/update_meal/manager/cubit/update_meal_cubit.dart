@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_mate/core/model/meal_model.dart';
 import 'package:meal_mate/core/data/repo/local_meals_repo.dart';
-import 'package:meal_mate/features/meals/update_meal/manager/cubit/update_meal_states.dart';
+import 'package:meal_mate/features/local_meals/update_meal/manager/cubit/update_meal_states.dart';
 
 class UpdateMealCubit extends Cubit<UpdateMealState> {
   final LocalMealsRepo localMealsRepo;

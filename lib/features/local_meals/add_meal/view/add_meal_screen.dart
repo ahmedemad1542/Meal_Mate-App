@@ -9,11 +9,11 @@ import 'package:meal_mate/core/model/meal_model.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
 import 'package:meal_mate/core/theming/text_style.dart';
 import 'package:meal_mate/core/widgets/image_manager/image_manager_view.dart';
-import 'package:meal_mate/features/meals/add_meal/manager/cubit/add_meal_cubit.dart';
-import 'package:meal_mate/features/meals/add_meal/manager/cubit/add_meal_states.dart';
-import 'package:meal_mate/features/meals/add_meal/view/widgets/add_meal_list_fields.dart';
-import 'package:meal_mate/features/meals/add_meal/view/widgets/custom_appbar.dart';
-import 'package:meal_mate/features/meals/add_meal/view/widgets/image_source_option.dart';
+import 'package:meal_mate/features/local_meals/add_meal/manager/cubit/add_meal_cubit.dart';
+import 'package:meal_mate/features/local_meals/add_meal/manager/cubit/add_meal_states.dart';
+import 'package:meal_mate/features/local_meals/add_meal/view/widgets/add_meal_list_fields.dart';
+import 'package:meal_mate/features/local_meals/add_meal/view/widgets/custom_appbar.dart';
+import 'package:meal_mate/features/local_meals/add_meal/view/widgets/image_source_option.dart';
 
 class AddMealScreen extends StatefulWidget {
   AddMealScreen({super.key});
@@ -128,41 +128,47 @@ class _AddMealScreenState extends State<AddMealScreen> {
                                     ],
                                   ),
                                 ),
-                            unPickedBody: Container(
-                              height: 120.h,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  style: BorderStyle.solid,
-                                ),
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.add_photo_alternate_outlined,
-                                    size: 40.sp,
-                                    color: Colors.grey[600],
+                            unPickedBody: GestureDetector(
+                              onTap:
+                                  () => _showImageSourceDialog(
+                                    context,
+                                  ), // 👈 هنا التعديل
+                              child: Container(
+                                height: 120.h,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    style: BorderStyle.solid,
                                   ),
-                                  SizedBox(height: 8.h),
-                                  Text(
-                                    'Add Meal Photo',
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.add_photo_alternate_outlined,
+                                      size: 40.sp,
                                       color: Colors.grey[600],
                                     ),
-                                  ),
-                                  SizedBox(height: 4.h),
-                                  Text(
-                                    'Tap to choose from gallery or camera',
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      color: Colors.grey[500],
+                                    SizedBox(height: 8.h),
+                                    Text(
+                                      'Add Meal Photo',
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Colors.grey[600],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 4.h),
+                                    Text(
+                                      'Tap to choose from gallery or camera',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.grey[500],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

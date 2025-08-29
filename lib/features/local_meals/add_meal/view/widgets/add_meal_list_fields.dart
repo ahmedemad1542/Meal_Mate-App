@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meal_mate/features/meals/add_meal/view/widgets/custom_textform.dart';
+import 'package:meal_mate/features/local_meals/add_meal/view/widgets/custom_textform.dart';
 
 class AddMealListFields extends StatelessWidget {
   final TextEditingController mealNameController;
