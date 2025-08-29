@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meal_mate/core/routing/app_routes.dart';
 import 'package:meal_mate/features/online_meals/area_feature/manager/cubit/area_cubit.dart';
 import 'package:meal_mate/features/online_meals/area_feature/manager/cubit/area_state.dart';
+import 'package:go_router/go_router.dart';
 
 
 class AreasScreen extends StatelessWidget {
@@ -24,8 +26,12 @@ class AreasScreen extends StatelessWidget {
             itemCount: state.areas.length,
             itemBuilder: (context, index) {
               final area = state.areas[index];
-              return Card(
-                child: Center(child: Text(area.name)),
+              return GestureDetector(onTap: () {
+                context.pushNamed(AppRoutes.categoryMealsScreen, extra: area.name);
+              },
+                child: Card(
+                  child: Center(child: Text(area.name)),
+                ),
               );
             },
           );

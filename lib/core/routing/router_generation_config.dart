@@ -10,8 +10,11 @@ import 'package:meal_mate/features/local_meals/meal_details/view/meal_details.da
 import 'package:meal_mate/features/local_meals/update_meal/manager/cubit/update_meal_cubit.dart';
 import 'package:meal_mate/features/local_meals/update_meal/view/update_meal_screen.dart';
 import 'package:meal_mate/features/onBoarding/view/on_boarding.dart';
+import 'package:meal_mate/features/online_meals/api_meal_details/view/api_meal_details_view.dart';
+import 'package:meal_mate/features/online_meals/api_meals/view/api_meal_view.dart';
+import 'package:meal_mate/features/online_meals/area_feature/view/area_view.dart';
+import 'package:meal_mate/features/online_meals/category_feature/view/category_view.dart';
 import 'package:meal_mate/features/splash_screen/splash_screen.dart';
-import 'package:path/path.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
@@ -64,11 +67,43 @@ class RouterGenerationConfig {
 
           return BlocProvider(
             create: (context) => UpdateMealCubit(LocalMealsRepo()),
-            child: UpdateMealScreen(
-              meal: meal,
-              mealKey: meal.key,
-            ),
+            child: UpdateMealScreen(meal: meal, mealKey: meal.key),
           );
+        },
+      ),
+
+      //online meals section
+      GoRoute(
+        path: AppRoutes.areaMealsScreen,
+        name: AppRoutes.areaMealsScreen,
+        builder: (context, state) => AreasScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.apiMealsScreen,
+        name: AppRoutes.apiMealsScreen,
+        builder: (context, state) {
+          final data = state.extra as Map<String, String>;
+          final area = data["area"]!;
+          final category = data["category"]!;
+          return ApiMealsScreen(area: area, category: category);
+        },
+      ),
+
+      GoRoute(
+        path: AppRoutes.apimealdetailsscreen,
+        name: AppRoutes.apimealdetailsscreen,
+        builder: (context, state) {
+          final mealId = state.extra as String;
+          return ApiMealDetailScreen(mealId: mealId);
+        },
+      ),
+
+      GoRoute(
+        path: AppRoutes.categoryMealsScreen,
+        name: AppRoutes.categoryMealsScreen,
+        builder: (context, state) {
+          final area = state.extra as String; // هنا استقبلنا الـ area
+          return ApiCategoriesScreen(area: area); // ابعته للصفحة
         },
       ),
     ],

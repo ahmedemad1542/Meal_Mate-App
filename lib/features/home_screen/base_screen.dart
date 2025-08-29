@@ -4,6 +4,7 @@ import 'package:meal_mate/features/local_meals/add_meal/view/add_meal_screen.dar
 import 'package:meal_mate/features/home_screen/custom_navigaton_bar/model/bottom_nav_items.dart';
 import 'package:meal_mate/features/home_screen/home_screen.dart';
 import 'package:meal_mate/features/home_screen/widgets/custom_nav_bar.dart';
+import 'package:meal_mate/features/online_meals/area_feature/view/area_view.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -22,9 +23,9 @@ class _BaseScreenState extends State<BaseScreen> {
       label: 'Home',
     ),
     BottomNavItems(
-      page:  AddMealScreen(),
+      page: AreasScreen(),
       iconWidget: Icon(Icons.local_fire_department),
-      label: 'Add',
+      label: 'online',
     ),
     BottomNavItems(
       page: Center(child: Text('Center')),
