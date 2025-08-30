@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:meal_mate/core/constants/country_codes.dart';
 import 'package:meal_mate/core/routing/app_routes.dart';
 import 'package:meal_mate/features/online_meals/area_feature/manager/cubit/area_cubit.dart';
 import 'package:meal_mate/features/online_meals/area_feature/manager/cubit/area_state.dart';
 import 'package:go_router/go_router.dart';
+import 'package:country_icons/country_icons.dart';
+
+
 
 
 class AreasScreen extends StatelessWidget {
@@ -30,6 +35,8 @@ class AreasScreen extends StatelessWidget {
               itemCount: state.areas.length,
               itemBuilder: (context, index) {
                 final area = state.areas[index];
+                final code = CountryCodes.map[area.name];
+
                 return GestureDetector(
                   onTap: () {
                     context.pushNamed(
@@ -38,7 +45,32 @@ class AreasScreen extends StatelessWidget {
                     );
                   },
                   child: Card(
-                    child: Center(child: Text(area.name)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 3,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (code != null)
+                          SvgPicture.asset(
+                            'icons/flags/svg/$code.svg',
+                            package: 'country_icons',
+                            width: 48,
+                            height: 48,
+                          )
+                        else
+                          const Icon(Icons.flag, size: 48, color: Colors.grey),
+                        const SizedBox(height: 8),
+                        Text(
+                          area.name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
