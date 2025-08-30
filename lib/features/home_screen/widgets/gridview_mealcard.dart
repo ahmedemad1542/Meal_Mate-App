@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meal_mate/core/model/meal_model.dart';
 import 'package:meal_mate/core/widgets/meal_card.dart';
@@ -17,7 +18,16 @@ class GridviewMealcard extends StatelessWidget {
         final keys = box.keys.toList();
 
         if (meals.isEmpty) {
-          return const Center(child: Text("No meals yet"));
+          return SizedBox(
+            height: 0.5.sh,
+            child: const Center(
+              child: Text(
+                "You don't have any\n saved meals yet\n press the add button\n to add a new meal",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
+            ),
+          );
         }
 
         return GridView.builder(
@@ -32,10 +42,7 @@ class GridviewMealcard extends StatelessWidget {
             childAspectRatio: 160 / 210,
           ),
           itemBuilder: (context, index) {
-            return MealCard(
-              meal: meals[index],
-              mealKey: keys[index] as int, 
-            );
+            return MealCard(meal: meals[index], mealKey: keys[index] as int);
           },
         );
       },
