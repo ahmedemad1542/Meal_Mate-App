@@ -34,10 +34,7 @@ class UpdateMealButtons extends StatelessWidget {
             ),
             child: Text(
               cancelButtonText,
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: Colors.grey[600],
-              ),
+              style: TextStyle(fontSize: 16.sp, color: Colors.grey[600]),
             ),
           ),
         ),
@@ -47,37 +44,34 @@ class UpdateMealButtons extends StatelessWidget {
         // Update Button
         Expanded(
           flex: 2,
-          child: isLoading
-              ? Container(
-                  height: 50.h,
-                  decoration: BoxDecoration(
-                    color: Colors.orange.withOpacity(0.7),
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
+          child: ElevatedButton(
+            onPressed: isLoading ? null : onUpdate,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.orange,
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: 16.h),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+            ),
+            child:
+                isLoading
+                    ? SizedBox(
+                      width: 24.w,
+                      height: 24.w,
+                      child: const CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 3,
+                      ),
+                    )
+                    : Text(
+                      updateButtonText,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                )
-              : ElevatedButton(
-                  onPressed: onUpdate,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                    foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(vertical: 16.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                  ),
-                  child: Text(
-                    updateButtonText,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+          ),
         ),
       ],
     );
