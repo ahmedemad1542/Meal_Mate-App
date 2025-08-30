@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meal_mate/core/theming/app_colors.dart';
+import 'package:path/path.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String label;
+
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
@@ -27,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
+        cursorColor: AppColors.orange,
         minLines: minLines,
         maxLines: maxLines ?? null,
         validator:
@@ -39,15 +43,13 @@ class CustomTextFormField extends StatelessWidget {
             },
         decoration: InputDecoration(
           labelText: label,
+          labelStyle: TextStyle(color: Colors.black),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0.r),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0.r),
-            borderSide: BorderSide(
-              color: Theme.of(context).primaryColor,
-              width: 2.0.w,
-            ),
+            borderSide: BorderSide(color: AppColors.orange, width: 2.0.w),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0.r),

@@ -10,6 +10,8 @@ import 'package:meal_mate/core/theming/app_colors.dart';
 import 'package:meal_mate/features/local_meals/add_meal/view/widgets/custom_textform.dart';
 import 'package:meal_mate/features/local_meals/update_meal/manager/cubit/update_meal_cubit.dart';
 import 'package:meal_mate/features/local_meals/update_meal/manager/cubit/update_meal_states.dart';
+import 'package:meal_mate/features/local_meals/update_meal/view/widgets/update_meal_image.dart';
+import 'package:meal_mate/features/local_meals/update_meal/view/widgets/update_meals_buttons.dart';
 
 class UpdateMealScreen extends StatefulWidget {
   final MealModel meal;
@@ -33,16 +35,26 @@ class _UpdateMealScreenState extends State<UpdateMealScreen> {
   void initState() {
     super.initState();
     _mealNameController = TextEditingController(text: widget.meal.name);
-    _cookingTimeController = TextEditingController(text: widget.meal.cookingTime.toString());
-    _descriptionController = TextEditingController(text: widget.meal.description);
-    _ratingController = TextEditingController(text: widget.meal.rating.toString());
+    _cookingTimeController = TextEditingController(
+      text: widget.meal.cookingTime.toString(),
+    );
+    _descriptionController = TextEditingController(
+      text: widget.meal.description,
+    );
+    _ratingController = TextEditingController(
+      text: widget.meal.rating.toString(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Meal'),
+        backgroundColor: AppColors.orange,
+        title: const Text(
+          'Update Meal',
+          style: TextStyle(color: AppColors.white),
+        ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () => context.pop(),
@@ -101,52 +113,15 @@ class _UpdateMealScreenState extends State<UpdateMealScreen> {
 
                     SizedBox(height: 24.h),
 
-                    // Image Update Section
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(16.w),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12.r),
-                        border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Meal Image',
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey[700],
-                                ),
-                              ),
-                              Spacer(),
-                              TextButton.icon(
-                                onPressed: () => _showImageSourceDialog(context),
-                                icon: Icon(Icons.edit, size: 16.sp),
-                                label: Text('Change'),
-                                style: TextButton.styleFrom(
-                                  foregroundColor: AppColors.orange,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 12.h),
-                          
-                          // Show selected image, new image, or default placeholder
-                          Container(
-                            height: 150.h,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                            ),
-                            child: _buildImageDisplay(),
-                          ),
-                        ],
-                      ),
+                    
+                    UpdateMealImage(
+                      onImageSelected: (image) {
+                        setState(() {
+                          _selectedImage = image;
+                        });
+                      },
+                      selectedImage: _selectedImage,
+                      existingImagePath: widget.meal.imagePath,
                     ),
 
                     SizedBox(height: 24.h),
@@ -155,7 +130,9 @@ class _UpdateMealScreenState extends State<UpdateMealScreen> {
                       label: 'Meal Name',
                       controller: _mealNameController,
                       validator: (value) =>
-                          value == null || value.isEmpty ? "Enter meal name" : null,
+                          value == null || value.isEmpty
+                              ? "Enter meal name"
+                              : null,
                     ),
 
                     SizedBox(height: 16.h),
@@ -185,7 +162,9 @@ class _UpdateMealScreenState extends State<UpdateMealScreen> {
                       controller: _descriptionController,
                       maxLines: 3,
                       validator: (value) =>
-                          value == null || value.isEmpty ? "Enter description" : null,
+                          value == null || value.isEmpty
+                              ? "Enter description"
+                              : null,
                     ),
 
                     SizedBox(height: 16.h),
@@ -211,92 +190,34 @@ class _UpdateMealScreenState extends State<UpdateMealScreen> {
 
                     SizedBox(height: 32.h),
 
-                    // Update and Cancel Buttons
-                    Row(
-                      children: [
-                        // Cancel Button
-                        Expanded(
-                          child: OutlinedButton(
-                            onPressed: () => context.pop(),
-                            style: OutlinedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(vertical: 16.h),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              side: BorderSide(color: Colors.grey[400]!),
+                    
+                    UpdateMealButtons(
+                      isLoading: state is UpdateMealLoadingState,
+                      onCancel: () => context.pop(),
+                      onUpdate: () {
+                        if (_formKey.currentState!.validate()) {
+                          final updatedMeal = MealModel(
+                            id: widget.meal.id,
+                            name: _mealNameController.text.trim(),
+                            cookingTime: int.parse(
+                              _cookingTimeController.text,
                             ),
-                            child: Text(
-                              'Cancel',
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                          ),
-                        ),
+                            description: _descriptionController.text.trim(),
+                            imagePath: _selectedImage?.path ?? widget.meal.imagePath,
+                            rating: double.tryParse(
+                                  _ratingController.text,
+                                ) ??
+                                widget.meal.rating,
+                          );
 
-                        SizedBox(width: 16.w),
-
-                        // Update Button
-                        Expanded(
-                          flex: 2,
-                          child: state is UpdateMealLoadingState
-                              ? Container(
-                                  height: 50.h,
-                                  decoration: BoxDecoration(
-                                    color: Colors.orange.withOpacity(0.7),
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
-                                  child: const Center(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                )
-                              : ElevatedButton(
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      final updatedMeal = MealModel(
-                                        id: widget.meal.id,
-                                        name: _mealNameController.text.trim(),
-                                        cookingTime: int.parse(
-                                          _cookingTimeController.text,
-                                        ),
-                                        description: _descriptionController.text.trim(),
-                                        imagePath: _selectedImage?.path ?? widget.meal.imagePath,
-                                        rating: double.tryParse(
-                                              _ratingController.text,
-                                            ) ?? widget.meal.rating,
-                                      );
-
-                                      context
-                                          .read<UpdateMealCubit>()
-                                          .updateMealByKey(
-                                            widget.mealKey,
-                                            updatedMeal,
-                                          );
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.orange,
-                                    foregroundColor: Colors.white,
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 16.h,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.r),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Update Meal',
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                        ),
-                      ],
+                          context
+                              .read<UpdateMealCubit>()
+                              .updateMealByKey(
+                                widget.mealKey,
+                                updatedMeal,
+                              );
+                        }
+                      },
                     ),
                   ],
                 ),
@@ -308,145 +229,6 @@ class _UpdateMealScreenState extends State<UpdateMealScreen> {
     );
   }
 
-  Widget _buildImageDisplay() {
-    // If new image is selected, show it
-    if (_selectedImage != null) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(8.r),
-        child: Image.file(
-          File(_selectedImage!.path),
-          fit: BoxFit.cover,
-          width: double.infinity,
-        ),
-      );
-    }
-    
-    // If meal has existing image, show it
-    if (widget.meal.imagePath != null && widget.meal.imagePath!.isNotEmpty) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(8.r),
-        child: Image.file(
-          File(widget.meal.imagePath!),
-          fit: BoxFit.cover,
-          width: double.infinity,
-          errorBuilder: (context, error, stackTrace) {
-            return _buildPlaceholder();
-          },
-        ),
-      );
-    }
-    
-    // Show placeholder if no image
-    return _buildPlaceholder();
-  }
-
-  Widget _buildPlaceholder() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.image_outlined,
-            size: 40.sp,
-            color: Colors.grey[600],
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            'No Image Selected',
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: Colors.grey[600],
-            ),
-          ),
-          SizedBox(height: 4.h),
-          Text(
-            'Tap "Change" to add photo',
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: Colors.grey[500],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showImageSourceDialog(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-      ),
-      builder: (BuildContext context) {
-        return SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(20.w),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Select Image Source',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _ImageSourceOption(
-                      icon: Icons.camera_alt,
-                      label: 'Camera',
-                      onTap: () {
-                        Navigator.pop(context);
-                        _pickImageFromSource(ImageSource.camera);
-                      },
-                    ),
-                    _ImageSourceOption(
-                      icon: Icons.photo_library,
-                      label: 'Gallery',
-                      onTap: () {
-                        Navigator.pop(context);
-                        _pickImageFromSource(ImageSource.gallery);
-                      },
-                    ),
-                    if (widget.meal.imagePath != null || _selectedImage != null)
-                      _ImageSourceOption(
-                        icon: Icons.delete_outline,
-                        label: 'Remove',
-                        onTap: () {
-                          Navigator.pop(context);
-                          setState(() {
-                            _selectedImage = null;
-                          });
-                        },
-                      ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void _pickImageFromSource(ImageSource source) async {
-    final ImagePicker picker = ImagePicker();
-    XFile? image = await picker.pickImage(source: source);
-    if (image != null) {
-      setState(() {
-        _selectedImage = image;
-      });
-    }
-  }
-
   @override
   void dispose() {
     _mealNameController.dispose();
@@ -454,50 +236,5 @@ class _UpdateMealScreenState extends State<UpdateMealScreen> {
     _descriptionController.dispose();
     _ratingController.dispose();
     super.dispose();
-  }
-}
-
-class _ImageSourceOption extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback onTap;
-
-  const _ImageSourceOption({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(16.w),
-        decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: Colors.grey.withOpacity(0.3)),
-        ),
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              size: 28.sp,
-              color: icon == Icons.delete_outline ? Colors.red : AppColors.orange,
-            ),
-            SizedBox(height: 6.h),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500,
-                color: icon == Icons.delete_outline ? Colors.red : Colors.black87,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
