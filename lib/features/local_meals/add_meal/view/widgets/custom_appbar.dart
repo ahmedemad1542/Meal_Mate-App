@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({super.key});
@@ -6,16 +7,15 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text(
-        'Add New Meal',
-        style: TextStyle(color: Colors.white),
+      title: Text(
+        'Add Your Recipe',
+        style: TextStyle(color: Colors.white, fontSize: 22.sp),
       ),
       centerTitle: true,
-      backgroundColor: Colors.orange, 
+      backgroundColor: Colors.orange,
     );
   }
 
-  
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
