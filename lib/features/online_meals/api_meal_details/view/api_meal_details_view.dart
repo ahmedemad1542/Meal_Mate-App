@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/data/repo/api_meal_details_repo.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_cubit.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_state.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 class ApiMealDetailScreen extends StatelessWidget {
   final String mealId;
@@ -15,10 +15,14 @@ class ApiMealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ApiMealDetailCubit(ApiMealDetailRepo())..getMealDetail(mealId),
+      create:
+          (_) => ApiMealDetailCubit(ApiMealDetailRepo())..getMealDetail(mealId),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Meal Details"),
+          title: const Text(
+            "Meal Details",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           centerTitle: true,
         ),
         body: BlocBuilder<ApiMealDetailCubit, ApiMealDetailState>(
@@ -32,25 +36,43 @@ class ApiMealDetailScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(meal.thumbnail),
-                    const SizedBox(height: 16),
-                    Text(
-                      meal.name,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12.r),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 200.h,
+                        child: Image.network(
+                          meal.thumbnail,
+                          fit: BoxFit.cover,
+                          errorBuilder:
+                              (context, error, stackTrace) => const Icon(
+                                Icons.broken_image,
+                                size: 80,
+                                color: Colors.grey,
+                              ),
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.h),
+                    Center(
+                      child: Text(
+                        meal.name,
+                        style: TextStyle(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16.h),
                     Text(
                       "Instructions:",
-                      style: const TextStyle(
-                        fontSize: 18,
+                      style: TextStyle(
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Text(meal.instructions),
+                    SizedBox(height: 8.h),
+                    Text(meal.instructions, style: TextStyle(fontSize: 16.sp)),
                   ],
                 ),
               );

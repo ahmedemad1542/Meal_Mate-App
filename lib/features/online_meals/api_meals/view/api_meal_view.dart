@@ -6,16 +6,11 @@ import 'package:meal_mate/features/online_meals/api_meals/manager/cubit/api_meal
 import 'package:meal_mate/features/online_meals/api_meals/manager/cubit/api_meals_state.dart';
 import 'package:go_router/go_router.dart';
 
-
 class ApiMealsScreen extends StatefulWidget {
   final String area;
   final String category;
 
-  const ApiMealsScreen({
-    super.key,
-    required this.area,
-    required this.category,
-  });
+  const ApiMealsScreen({super.key, required this.area, required this.category});
 
   @override
   State<ApiMealsScreen> createState() => _ApiMealsScreenState();
@@ -25,7 +20,7 @@ class _ApiMealsScreenState extends State<ApiMealsScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     final cubit = context.read<ApiMealCubit>();
     cubit.getMealsByCategory(widget.category);
     cubit.getMealsByArea(widget.area);
@@ -35,7 +30,10 @@ class _ApiMealsScreenState extends State<ApiMealsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meals (${widget.category}, ${widget.area})"),
+        title: Text(
+          " (${widget.category}, ${widget.area})",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: BlocBuilder<ApiMealCubit, ApiMealState>(
@@ -47,8 +45,8 @@ class _ApiMealsScreenState extends State<ApiMealsScreen> {
               padding: const EdgeInsets.all(12),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 15,
               ),
               itemCount: state.meals.length,
               itemBuilder: (context, index) {
@@ -61,12 +59,42 @@ class _ApiMealsScreenState extends State<ApiMealsScreen> {
                     );
                   },
                   child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    elevation: 4,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.network(meal.thumbnail, height: 60),
-                        const SizedBox(height: 8),
-                        Text(meal.name),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network(
+                            meal.thumbnail,
+                            height: 100.h,
+                            width: 100.w,
+                            fit: BoxFit.cover,
+                            errorBuilder:
+                                (context, error, stackTrace) => const Icon(
+                                  Icons.broken_image,
+                                  size: 60,
+                                  color: Colors.grey,
+                                ),
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            meal.name,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
                       ],
                     ),
                   ),
