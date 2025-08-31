@@ -18,6 +18,7 @@ class AreasScreen extends StatelessWidget {
           "Available Areas",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        automaticallyImplyLeading: false,
         centerTitle: true,
       ),
       body: BlocBuilder<AreaCubit, AreaState>(
