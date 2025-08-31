@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meal_mate/core/theming/app_colors.dart';
 
 class UpdateMealButtons extends StatelessWidget {
   final bool isLoading;
@@ -23,18 +24,23 @@ class UpdateMealButtons extends StatelessWidget {
       children: [
         // Cancel Button
         Expanded(
-          child: OutlinedButton(
+          child: ElevatedButton(
             onPressed: onCancel,
-            style: OutlinedButton.styleFrom(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: AppColors.white,
               padding: EdgeInsets.symmetric(vertical: 16.h),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              side: BorderSide(color: Colors.grey[400]!),
             ),
             child: Text(
               cancelButtonText,
-              style: TextStyle(fontSize: 16.sp, color: Colors.grey[600]),
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: AppColors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
@@ -47,8 +53,8 @@ class UpdateMealButtons extends StatelessWidget {
           child: ElevatedButton(
             onPressed: isLoading ? null : onUpdate,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.orange,
-              foregroundColor: Colors.white,
+              backgroundColor: Colors.green,
+              foregroundColor: AppColors.white,
               padding: EdgeInsets.symmetric(vertical: 16.h),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r),
@@ -60,7 +66,7 @@ class UpdateMealButtons extends StatelessWidget {
                       width: 24.w,
                       height: 24.w,
                       child: const CircularProgressIndicator(
-                        color: Colors.white,
+                        color: AppColors.white,
                         strokeWidth: 3,
                       ),
                     )
@@ -69,6 +75,7 @@ class UpdateMealButtons extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
+                        color: AppColors.white,
                       ),
                     ),
           ),
