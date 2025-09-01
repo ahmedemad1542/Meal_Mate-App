@@ -17,4 +17,6 @@ class AppRoutes {
   static const String apimealdetailsscreen = '/apimealdetailsscreen';
   static const String apiMealsScreen = '/apiMealsScreen';
 
+   static const String chatScreen = '/chatScreen';
+
 }

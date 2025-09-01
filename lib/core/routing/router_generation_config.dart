@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_mate/core/model/meal_model.dart';
 import 'package:meal_mate/core/routing/app_routes.dart';
+import 'package:meal_mate/features/chat_bot/view/chatbot_screen.dart';
 import 'package:meal_mate/features/home_screen/base_screen.dart';
 import 'package:meal_mate/features/local_meals/add_meal/manager/cubit/add_meal_cubit.dart';
 import 'package:meal_mate/features/local_meals/add_meal/view/add_meal_screen.dart';
@@ -106,6 +107,13 @@ class RouterGenerationConfig {
           return ApiCategoriesScreen(area: area); // ابعته للصفحة
         },
       ),
+
+       GoRoute(
+        path: AppRoutes.chatScreen,
+        name: AppRoutes.chatScreen,
+        builder: (context, state) =>  ChatScreen(),
+      ),
     ],
   );
+    
 }

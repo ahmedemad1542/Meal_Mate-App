@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
+import 'package:meal_mate/features/chat_bot/view/chatbot_screen.dart';
 import 'package:meal_mate/features/local_meals/add_meal/view/add_meal_screen.dart';
 import 'package:meal_mate/features/home_screen/custom_navigaton_bar/model/bottom_nav_items.dart';
 import 'package:meal_mate/features/home_screen/home_screen.dart';
@@ -28,14 +29,14 @@ class _BaseScreenState extends State<BaseScreen> {
       label: 'online',
     ),
     BottomNavItems(
-      page: Center(child: Text('Center')),
+      page:  ChatScreen(),
       iconWidget: null,
       label: '',
     ),
     BottomNavItems(
-      page: Center(child: Text('Chat')),
+      page: Center(child: Text('Center')),
       iconWidget: Icon(Icons.chat),
-      label: 'Chat',
+      label: 'settings',
     ),
     BottomNavItems(
       page: Center(child: Text('More')),
