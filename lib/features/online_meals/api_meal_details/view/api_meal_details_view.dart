@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:meal_mate/core/model/meal_model.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/data/repo/api_meal_details_repo.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_cubit.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_state.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meal_mate/features/online_meals/mappers/api_meal_mapper.dart';
 
 class ApiMealDetailScreen extends StatelessWidget {
   final String mealId;
@@ -73,6 +76,20 @@ class ApiMealDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 8.h),
                     Text(meal.instructions, style: TextStyle(fontSize: 16.sp)),
+                    SizedBox(height: 12.h),
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        final box = Hive.box<MealModel>('meals');
+                        final localMeal = meal.toLocalMeal();
+                        await box.add(localMeal);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Meal saved locally!")),
+                        );
+                      },
+                      icon: const Icon(Icons.download),
+                      label: const Text("Save Locally"),
+                    ),
                   ],
                 ),
               );

@@ -57,21 +57,12 @@ class MealCard extends StatelessWidget {
                       top: Radius.circular(12.r),
                     ),
                   ),
-                  child:
-                      meal.imagePath != null
-                          ? ClipRRect(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(12.r),
-                            ),
-                            child: Image.file(
-                              File(meal.imagePath!),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return _buildPlaceholderImage();
-                              },
-                            ),
-                          )
-                          : _buildPlaceholderImage(),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(12.r),
+                    ),
+                    child: _buildMealImage(meal.imagePath),
+                  ),
                 ),
               ),
 
@@ -253,6 +244,32 @@ class MealCard extends StatelessWidget {
     );
   }
 
+  Widget _buildMealImage(String? imagePath) {
+    if (imagePath == null) {
+      return _buildPlaceholderImage();
+    }
+
+    if (imagePath.startsWith("http")) {
+      // الصورة جايه من الانترنت
+      return Image.network(
+        imagePath,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return _buildPlaceholderImage();
+        },
+      );
+    } else {
+      // الصورة جايه من الجهاز (camera/gallery)
+      return Image.file(
+        File(imagePath),
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return _buildPlaceholderImage();
+        },
+      );
+    }
+  }
+
   void _showDeleteConfirmation(
     BuildContext context,
     int mealKey,
@@ -323,4 +340,5 @@ class MealCard extends StatelessWidget {
           ),
     );
   }
+  
 }

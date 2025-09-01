@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meal_mate/core/model/meal_model.dart';
-import 'package:meal_mate/core/widgets/meal_card.dart';
+import 'package:meal_mate/core/widgets/meal_card/view/meal_card.dart';
 
 class GridviewMealcard extends StatelessWidget {
   const GridviewMealcard({super.key});

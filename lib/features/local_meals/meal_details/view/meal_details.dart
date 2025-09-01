@@ -35,35 +35,19 @@ class MealDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Meal Image (if available)
-            if (meal.imagePath != null)
-    Container(
-      height: 200.h,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
-        image: DecorationImage(
-          image: FileImage(File(meal.imagePath!)), // 👈 بدل NetworkImage
-          fit: BoxFit.cover,
-          onError: (error, stackTrace) {
-            // Placeholder في حالة الصورة مش موجودة
-          },
-        ),
-      ),
-    )
-            else
-              Container(
-                height: 200.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.grey[300],
-                ),
-                child: Icon(
-                  Icons.restaurant_menu,
-                  size: 60.sp,
-                  color: Colors.grey[600],
-                ),
-              ),
+           Container(
+  height: 200.h,
+  width: double.infinity,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(12.r),
+    color: Colors.grey[300],
+  ),
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(12.r),
+    child: _buildMealImage(meal.imagePath),
+  ),
+),
+
 
             SizedBox(height: 24.h),
 
@@ -147,4 +131,28 @@ class MealDetailsScreen extends StatelessWidget {
       ),
     );
   }
+  Widget _buildMealImage(String? imagePath) {
+  if (imagePath == null) {
+    return Icon(Icons.restaurant_menu, size: 60.sp, color: Colors.grey[600]);
+  }
+
+  if (imagePath.startsWith("http")) {
+    return Image.network(
+      imagePath,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Icon(Icons.broken_image, size: 60.sp, color: Colors.grey[600]);
+      },
+    );
+  } else {
+    return Image.file(
+      File(imagePath),
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Icon(Icons.broken_image, size: 60.sp, color: Colors.grey[600]);
+      },
+    );
+  }
+}
+
 }
