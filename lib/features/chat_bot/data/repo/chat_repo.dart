@@ -6,7 +6,7 @@ import 'package:meal_mate/features/chat_bot/data/model/chat_model.dart';
 class ChatRepo {
   final Dio _dio;
 
-  ChatRepo({String? apiKey})
+ChatRepo({String? apiKey})
       : _dio = Dio(
           BaseOptions(
             baseUrl: "https://api.groq.com/openai/v1/",

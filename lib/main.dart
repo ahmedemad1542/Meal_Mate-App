@@ -27,7 +27,6 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(MealModelAdapter());
   await Hive.openBox<MealModel>('meals');
-
   await dotenv.load(fileName: ".env");
 
   runApp(const MyApp());
