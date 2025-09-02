@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meal_mate/core/theming/app_colors.dart';
+import 'package:meal_mate/core/theming/custom_colors.dart';
 import 'package:meal_mate/features/chat_bot/data/model/chat_model.dart';
+
 
 class ChatMessageBubble extends StatelessWidget {
   final ChatMessage message;
@@ -10,6 +11,7 @@ class ChatMessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     final isUser = message.role == "user";
 
     return Padding(
@@ -24,12 +26,12 @@ class ChatMessageBubble extends StatelessWidget {
               width: 32.w,
               height: 32.w,
               decoration: BoxDecoration(
-                color: AppColors.orange,
+                color: colors.primary, // bot avatar bg
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.restaurant_menu,
-                color: Colors.white,
+                color: colors.onPrimary,
                 size: 18.sp,
               ),
             ),
@@ -41,7 +43,7 @@ class ChatMessageBubble extends StatelessWidget {
                 maxWidth: MediaQuery.of(context).size.width * 0.75,
               ),
               decoration: BoxDecoration(
-                color: isUser ? const Color(0xFF2E7D63) : Colors.white,
+                color: isUser ? colors.userBubble : colors.surface,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20.r),
                   topRight: Radius.circular(20.r),
@@ -50,7 +52,7 @@ class ChatMessageBubble extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: colors.elevationShadow,
                     blurRadius: 8.r,
                     offset: Offset(0, 2.h),
                   ),
@@ -63,7 +65,7 @@ class ChatMessageBubble extends StatelessWidget {
                   Text(
                     message.content,
                     style: TextStyle(
-                      color: isUser ? Colors.white : Colors.black87,
+                      color: isUser ? colors.userBubbleText : colors.onSurface,
                       fontSize: 16.sp,
                       height: 1.4,
                     ),
@@ -72,7 +74,9 @@ class ChatMessageBubble extends StatelessWidget {
                   Text(
                     "${message.timestamp.hour.toString().padLeft(2, '0')}:${message.timestamp.minute.toString().padLeft(2, '0')}",
                     style: TextStyle(
-                      color: isUser ? Colors.white70 : const Color(0xFF9E9E9E),
+                      color: isUser
+                          ? colors.userBubbleText.withOpacity(0.8)
+                          : colors.timestampColor,
                       fontSize: 11.sp,
                     ),
                   ),
@@ -85,11 +89,11 @@ class ChatMessageBubble extends StatelessWidget {
             Container(
               width: 32.w,
               height: 32.w,
-              decoration: const BoxDecoration(
-                color: Color(0xFFE0E0E0),
+              decoration: BoxDecoration(
+                color: colors.userAvatarBg,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.person, color: Color(0xFF757575), size: 18.sp),
+              child: Icon(Icons.person, color: colors.userAvatarIcon, size: 18.sp),
             ),
           ],
         ],

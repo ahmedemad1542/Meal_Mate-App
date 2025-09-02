@@ -15,6 +15,7 @@ import 'package:meal_mate/features/online_meals/api_meal_details/view/api_meal_d
 import 'package:meal_mate/features/online_meals/api_meals/view/api_meal_view.dart';
 import 'package:meal_mate/features/online_meals/area_feature/view/area_view.dart';
 import 'package:meal_mate/features/online_meals/category_feature/view/category_view.dart';
+import 'package:meal_mate/features/settings/view/settings_page.dart';
 import 'package:meal_mate/features/splash_screen/splash_screen.dart';
 
 class RouterGenerationConfig {
@@ -113,6 +114,10 @@ class RouterGenerationConfig {
         name: AppRoutes.chatScreen,
         builder: (context, state) =>  ChatScreen(),
       ),
+        GoRoute(
+        path: AppRoutes.settingsPage,
+        name: AppRoutes.settingsPage,
+        builder: (context, state) =>  SettingsPage(),)
     ],
   );
     

@@ -13,6 +13,8 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -20,7 +22,7 @@ class ErrorView extends StatelessWidget {
           Icon(
             Icons.error_outline,
             size: 64.sp,
-            color: Colors.red,
+            color: colors.error, 
           ),
           SizedBox(height: 16.h),
           Text(
@@ -28,7 +30,7 @@ class ErrorView extends StatelessWidget {
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF757575),
+              color: colors.onSurfaceVariant, 
             ),
           ),
           SizedBox(height: 8.h),
@@ -36,12 +38,16 @@ class ErrorView extends StatelessWidget {
             message,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: const Color(0xFF757575),
+              color: colors.onSurfaceVariant,
               fontSize: 14.sp,
             ),
           ),
           SizedBox(height: 16.h),
           ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colors.primary, 
+              foregroundColor: colors.onPrimary,
+            ),
             onPressed: () => context.read<ChatCubit>().clearChat(),
             icon: Icon(
               Icons.refresh,

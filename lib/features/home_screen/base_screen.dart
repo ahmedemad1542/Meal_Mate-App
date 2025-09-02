@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:meal_mate/core/theming/app_assets.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
+
+import 'package:meal_mate/features/calculators/calculators_page.dart';
 import 'package:meal_mate/features/chat_bot/view/chatbot_screen.dart';
-import 'package:meal_mate/features/local_meals/add_meal/view/add_meal_screen.dart';
+
 import 'package:meal_mate/features/home_screen/custom_navigaton_bar/model/bottom_nav_items.dart';
 import 'package:meal_mate/features/home_screen/home_screen.dart';
 import 'package:meal_mate/features/home_screen/widgets/custom_nav_bar.dart';
 import 'package:meal_mate/features/online_meals/area_feature/view/area_view.dart';
+import 'package:meal_mate/features/settings/view/settings_page.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -17,33 +22,46 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   int _currentIndex = 0;
 
-  final List<BottomNavItems> _items = [
-    BottomNavItems(
-      page: const HomeScreen(),
-      iconWidget: Icon(Icons.home),
-      label: 'Home',
-    ),
-    BottomNavItems(
-      page: AreasScreen(),
-      iconWidget: Icon(Icons.local_fire_department),
-      label: 'online',
-    ),
-    BottomNavItems(
-      page:  ChatScreen(),
-      iconWidget: null,
-      label: '',
-    ),
-    BottomNavItems(
-      page: Center(child: Text('Center')),
-      iconWidget: Icon(Icons.chat),
-      label: 'settings',
-    ),
-    BottomNavItems(
-      page: Center(child: Text('More')),
-      iconWidget: Icon(Icons.menu),
-      label: 'More',
-    ),
-  ];
+  /// 🔹 Helper Method
+  Widget _buildSvgIcon(String asset, int iconIndex) {
+    return SvgPicture.asset(
+      asset,
+      color: _currentIndex == iconIndex ? AppColors.orange : AppColors.black,
+      height: 24,
+      width: 24,
+    );
+  }
+
+  List<BottomNavItems> get _items => [
+        BottomNavItems(
+          page: const HomeScreen(),
+          iconWidget: Icon(
+            Icons.home,
+            color: _currentIndex == 0 ? AppColors.orange : AppColors.black,
+          ),
+          label: 'Home',
+        ),
+        BottomNavItems(
+          page: AreasScreen(),
+          iconWidget: _buildSvgIcon(AppAssets.discover, 1),
+          label: 'Online',
+        ),
+        BottomNavItems(
+          page: ChatScreen(),
+          iconWidget: null,
+          label: '',
+        ),
+        BottomNavItems(
+          page: CalculatorsPage(),
+          iconWidget: _buildSvgIcon(AppAssets.calculator, 3),
+          label: 'Calculators',
+        ),
+        BottomNavItems(
+          page:SettingsPage(),
+          iconWidget: _buildSvgIcon(AppAssets.settings, 4),
+          label: 'Settings',
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {

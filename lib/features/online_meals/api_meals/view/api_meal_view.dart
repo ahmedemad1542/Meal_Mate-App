@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/core/routing/app_routes.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
+import 'package:meal_mate/core/theming/custom_colors.dart';
 import 'package:meal_mate/features/online_meals/api_meals/manager/cubit/api_meals_cubit.dart';
 import 'package:meal_mate/features/online_meals/api_meals/manager/cubit/api_meals_state.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +37,7 @@ class _ApiMealsScreenState extends State<ApiMealsScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: AppColors.white,
+         backgroundColor: Theme.of(context).colorScheme.apiMealsAppBar,
       ),
       body: BlocBuilder<ApiMealCubit, ApiMealState>(
         builder: (context, state) {
@@ -61,6 +62,7 @@ class _ApiMealsScreenState extends State<ApiMealsScreen> {
                     );
                   },
                   child: Card(
+                    color: Theme.of(context).colorScheme.apiMealCardBackground,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16.r),
                     ),
@@ -76,10 +78,11 @@ class _ApiMealsScreenState extends State<ApiMealsScreen> {
                             width: 100.w,
                             fit: BoxFit.cover,
                             errorBuilder:
-                                (context, error, stackTrace) => const Icon(
+                                (context, error, stackTrace) =>  Icon(
                                   Icons.broken_image,
                                   size: 60,
-                                  color: Colors.grey,
+                                  color: Theme.of(context).colorScheme.brokenImageIcon,
+                                
                                 ),
                           ),
                         ),

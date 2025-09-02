@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meal_mate/core/model/meal_model.dart';
+import 'package:meal_mate/core/theming/custom_colors.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/data/repo/api_meal_details_repo.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_cubit.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_state.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:meal_mate/features/online_meals/mappers/api_meal_mapper.dart';
 
 class ApiMealDetailScreen extends StatelessWidget {
@@ -18,15 +18,18 @@ class ApiMealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (_) => ApiMealDetailCubit(ApiMealDetailRepo())..getMealDetail(mealId),
+      create: (_) => ApiMealDetailCubit(ApiMealDetailRepo())..getMealDetail(mealId),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Meal Details",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
           ),
           centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.apiMealDetailBackground,
         ),
         body: BlocBuilder<ApiMealDetailCubit, ApiMealDetailState>(
           builder: (context, state) {
@@ -47,12 +50,11 @@ class ApiMealDetailScreen extends StatelessWidget {
                         child: Image.network(
                           meal.thumbnail,
                           fit: BoxFit.cover,
-                          errorBuilder:
-                              (context, error, stackTrace) => const Icon(
-                                Icons.broken_image,
-                                size: 80,
-                                color: Colors.grey,
-                              ),
+                          errorBuilder: (context, error, stackTrace) => Icon(
+                            Icons.broken_image,
+                            size: 80,
+                            color: Theme.of(context).colorScheme.brokenImageIcon,
+                          ),
                         ),
                       ),
                     ),
@@ -63,6 +65,7 @@ class ApiMealDetailScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ),
@@ -72,10 +75,17 @@ class ApiMealDetailScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     SizedBox(height: 8.h),
-                    Text(meal.instructions, style: TextStyle(fontSize: 16.sp)),
+                    Text(
+                      meal.instructions,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
                     SizedBox(height: 12.h),
                     ElevatedButton.icon(
                       onPressed: () async {
@@ -84,17 +94,41 @@ class ApiMealDetailScreen extends StatelessWidget {
                         await box.add(localMeal);
 
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Meal saved locally!")),
+                          SnackBar(
+                            content: Text(
+                              "Meal saved locally!",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                            ),
+                            backgroundColor: Theme.of(context).colorScheme.primary,
+                          ),
                         );
                       },
-                      icon: const Icon(Icons.download),
-                      label: const Text("Save Locally"),
+                      icon: Icon(
+                        Icons.download,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      label: Text(
+                        "Save Locally",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ],
                 ),
               );
             } else if (state is ApiMealDetailError) {
-              return Center(child: Text(state.message));
+              return Center(
+                child: Text(
+                  state.message,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              );
             }
             return const SizedBox.shrink();
           },
@@ -103,3 +137,4 @@ class ApiMealDetailScreen extends StatelessWidget {
     );
   }
 }
+

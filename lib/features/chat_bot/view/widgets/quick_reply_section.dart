@@ -19,6 +19,8 @@ class QuickReplySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Container(
       height: 60.h,
       padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -32,13 +34,20 @@ class QuickReplySection extends StatelessWidget {
             child: ActionChip(
               label: Text(
                 quickReplies[index],
-                style: TextStyle(fontSize: 12.sp),
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: colors.onSurface, 
+                ),
               ),
-              backgroundColor: Colors.white,
-              side: const BorderSide(color: Color(0xFFE0E0E0)),
+              backgroundColor: colors.surface, 
+              side: BorderSide(
+                color: colors.outline, 
+              ),
               onPressed: () {
                 context.read<ChatCubit>().addQuickReply(
-                  quickReplies[index].replaceAll(RegExp(r'[^\w\s]'), '').trim(),
+                  quickReplies[index]
+                      .replaceAll(RegExp(r'[^\w\s]'), '')
+                      .trim(),
                 );
                 onReplyTap();
               },

@@ -18,5 +18,8 @@ class AppRoutes {
   static const String apiMealsScreen = '/apiMealsScreen';
 
    static const String chatScreen = '/chatScreen';
+   static const String chatBotScreen = '/chatBotScreen';
+  static const String calculatorsPage = '/calculatorsPage';
+  static const String settingsPage = '/settingsPage';
 
 }

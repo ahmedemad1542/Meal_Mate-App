@@ -28,7 +28,7 @@ class CustomBottomNavBar extends StatelessWidget {
         clipBehavior: Clip.none,
         alignment: Alignment.bottomCenter,
         children: [
-          /// الرسم الخلفي
+          
           CustomPaint(size: Size(1.sw, 75.h), painter: BNBCustomPainter()),
 
           //floating center button
@@ -48,7 +48,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 ),
                 child: Center(
                   child: SvgPicture.asset(
-                    AppAssets.ai,
+                    AppAssets.chatbot,
                     width: 40.w,
                     height: 40.h,
                   ),
@@ -101,7 +101,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 showUnselectedLabels: true,
                 selectedLabelStyle: const TextStyle(color: AppColors.black),
                 unselectedLabelStyle: const TextStyle(color: Colors.black45),
-                type: BottomNavigationBarType.fixed
+                type: BottomNavigationBarType.fixed,
               ),
             ),
           ),

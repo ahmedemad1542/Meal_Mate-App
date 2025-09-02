@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meal_mate/core/theming/app_colors.dart';
 
 class ChatInput extends StatelessWidget {
   final TextEditingController controller;
@@ -10,12 +9,14 @@ class ChatInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colors.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: colors.shadow.withOpacity(0.05),
             blurRadius: 10.r,
             offset: Offset(0, -2.h),
           ),
@@ -28,20 +29,22 @@ class ChatInput extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5F7FA),
+                  color: colors.surfaceVariant,
                   borderRadius: BorderRadius.circular(24.r),
-                  border: Border.all(color: const Color(0xFFE0E0E0)),
+                  border: Border.all(color: colors.outline),
                 ),
                 child: TextField(
                   controller: controller,
                   decoration: InputDecoration(
                     hintText: "What ingredients do you have?",
+                    hintStyle: TextStyle(color: colors.onSurfaceVariant),
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: 20.w,
                       vertical: 12.h,
                     ),
                   ),
+                  style: TextStyle(color: colors.onSurface),
                   textInputAction: TextInputAction.send,
                   onSubmitted: (_) => onSend(),
                   maxLines: null,
@@ -51,13 +54,13 @@ class ChatInput extends StatelessWidget {
             SizedBox(width: 12.w),
             Container(
               decoration: BoxDecoration(
-                color: AppColors.orange,
+                color: colors.primary,
                 shape: BoxShape.circle,
               ),
               child: IconButton(
                 icon: Icon(
                   Icons.send_rounded,
-                  color: Colors.white,
+                  color: colors.onPrimary,
                   size: 24.sp,
                 ),
                 onPressed: onSend,

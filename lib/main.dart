@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:meal_mate/core/model/meal_model.dart';
 import 'package:meal_mate/core/routing/router_generation_config.dart';
+import 'package:meal_mate/core/theming/app_theme.dart';
 import 'package:meal_mate/features/chat_bot/data/repo/chat_repo.dart';
 import 'package:meal_mate/features/chat_bot/manager/cubit/chatbot_cubit.dart';
 
@@ -20,6 +21,9 @@ import 'package:meal_mate/features/online_meals/area_feature/data/repo/area_repo
 import 'package:meal_mate/features/online_meals/area_feature/manager/cubit/area_cubit.dart';
 import 'package:meal_mate/features/online_meals/category_feature/data/repo/category_repo.dart';
 import 'package:meal_mate/features/online_meals/category_feature/manager/cubit/category_cubit.dart';
+import 'package:meal_mate/features/settings/language/manager/cubit/language_cubit.dart';
+import 'package:meal_mate/features/settings/theme/manager/cubit/theme_cubit.dart';
+import 'package:meal_mate/features/settings/theme/manager/cubit/theme_states.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,12 +57,21 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (_) => ApiMealDetailCubit(ApiMealDetailRepo()),
             ),
+            BlocProvider(create: (_) => LanguageCubit()),
+            BlocProvider(create: (_) => ThemeCubit()),
           ],
 
-          child: MaterialApp.router(
-            title: 'Meal Mate',
-            debugShowCheckedModeBanner: false,
-            routerConfig: RouterGenerationConfig.goRouter,
+          child: BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return MaterialApp.router(
+                title: 'Meal Mate',
+                debugShowCheckedModeBanner: false,
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                routerConfig: RouterGenerationConfig.goRouter,
+              );
+            },
           ),
         );
       },
