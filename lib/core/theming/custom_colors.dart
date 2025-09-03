@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 
 extension CustomColors on ColorScheme {
-  // ألوان الأيقونات الافتراضية لو مفيش علم
+  // defult icon colors if there is no flag
   Color get flagIcon =>
       brightness == Brightness.dark ? Colors.grey[400]! : Colors.grey[700]!;
 
-  // ألوان البطاقات
+  // card colors
   Color get areaCardBackground =>
       brightness == Brightness.dark ? const Color(0xFF2C2C2C) : Colors.white;
-
-  // ألوان النصوص في البطاقات
+// card text
   Color get areaCardText => onSurface;
 
-  // ألوان الأزرار في الـ Dialog
+  //Dialog
   Color get yesButton => Colors.green;
   Color get noButton => Colors.red;
 
-  // جديد: النصوص في AppBar
+  //AppBar
   Color get appBarText => onPrimary;
 
-  // جديد: نصوص الخطأ
+  // error text
   Color get errorText => error;
 
   // New for ApiMealsScreen
@@ -29,7 +28,7 @@ extension CustomColors on ColorScheme {
       brightness == Brightness.dark ? Colors.grey[400]! : Colors.grey[700]!;
   Color get apiMealsAppBar => surface;
 
-  // جديد للـ ApiMealDetailScreen
+  // ApiMealDetailScreen
   Color get apiMealDetailBackground =>
       brightness == Brightness.dark ? const Color(0xFF2C2C2C) : Colors.white;
 
@@ -71,7 +70,6 @@ extension CustomColors on ColorScheme {
   Color get userAvatarIcon =>
       brightness == Brightness.dark ? Colors.grey.shade300 : const Color(0xFF757575);
 
-  // if you use 'shadow' elsewhere, add a getter name you use consistently:
 
 }
 

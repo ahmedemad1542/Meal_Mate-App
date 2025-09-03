@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:meal_mate/core/constants/country_codes.dart';
-import 'package:meal_mate/core/routing/app_routes.dart';
+
 import 'package:meal_mate/features/online_meals/area_feature/manager/cubit/area_cubit.dart';
 import 'package:meal_mate/features/online_meals/area_feature/manager/cubit/area_state.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:meal_mate/features/online_meals/area_feature/widgets/areas_grid.dart';
 import 'package:meal_mate/features/online_meals/area_feature/widgets/exit_dialoge.dart';
 
@@ -49,7 +47,9 @@ class _AreasScreenState extends State<AreasScreen> {
             "Available Areas",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
             ),
           ),
         ),

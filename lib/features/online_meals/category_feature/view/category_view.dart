@@ -19,7 +19,10 @@ class ApiCategoriesScreen extends StatelessWidget {
           "Categories in $area",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: colors.appBarText,
+            color:
+                Theme.of(context).brightness == Brightness.light
+                    ? Colors.black
+                    : Colors.white,
           ),
         ),
         centerTitle: true,

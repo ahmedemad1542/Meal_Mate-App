@@ -9,7 +9,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meal_mate/core/model/meal_model.dart';
 import 'package:meal_mate/core/routing/app_routes.dart';
 import 'package:meal_mate/core/theming/app_assets.dart';
-import 'package:meal_mate/core/theming/app_colors.dart';
+
+import 'package:meal_mate/core/theming/custom_colors.dart';
 
 class MealCard extends StatelessWidget {
   final MealModel meal;
@@ -20,6 +21,8 @@ class MealCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mealsBox = Hive.box<MealModel>('meals');
+    final colors = Theme.of(context).colorScheme;
+    final custom = colors; // CustomColors extension على ColorScheme
     final actualMealKey =
         mealKey ??
         mealsBox.keys.firstWhere(
@@ -32,22 +35,21 @@ class MealCard extends StatelessWidget {
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       child: GestureDetector(
-        // Normal tap - Navigate to details
         onTap: () {
           context.push(AppRoutes.mealDetailsScreen, extra: meal);
-
-          ;
         },
-        // Long press (update/delete)
         onLongPress: () {
           _showOptionsBottomSheet(context, actualMealKey);
         },
         child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.r),
+            color: custom.apiMealCardBackground,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Meal Image (if available)
+              // Meal Image
               Expanded(
                 flex: 3,
                 child: Container(
@@ -61,7 +63,7 @@ class MealCard extends StatelessWidget {
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(12.r),
                     ),
-                    child: _buildMealImage(meal.imagePath),
+                    child: _buildMealImage(meal.imagePath, custom),
                   ),
                 ),
               ),
@@ -82,7 +84,7 @@ class MealCard extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: custom.areaCardText,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -99,7 +101,7 @@ class MealCard extends StatelessWidget {
                               '${meal.cookingTime} min',
                               style: TextStyle(
                                 fontSize: 14.sp,
-                                color: Colors.grey[600],
+                                color: custom.secondaryText,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -110,14 +112,12 @@ class MealCard extends StatelessWidget {
                             meal.rating.toString(),
                             style: TextStyle(
                               fontSize: 14.sp,
-                              color: Colors.grey[600],
+                              color: custom.secondaryText,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                         ],
                       ),
-
-                      // Description Preview
                     ],
                   ),
                 ),
@@ -129,145 +129,135 @@ class MealCard extends StatelessWidget {
     );
   }
 
-  Widget _buildPlaceholderImage() {
+  Widget _buildPlaceholderImage(ColorScheme custom) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: custom.brokenImageIcon.withOpacity(0.2),
         borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
       ),
       child: Center(
-        child: Icon(Icons.restaurant, size: 30.sp, color: Colors.grey[600]),
+        child: Icon(Icons.restaurant, size: 30.sp, color: custom.brokenImageIcon),
       ),
     );
   }
 
-  void _showOptionsBottomSheet(BuildContext context, int actualMealKey) {
-    final mealsBox = Hive.box<MealModel>('meals');
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder:
-          (context) => Container(
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-            ),
-            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Handle bar
-                Container(
-                  width: 40.w,
-                  height: 4.h,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(2.r),
-                  ),
-                ),
-
-                SizedBox(height: 20.h),
-
-                // Meal name
-                Text(
-                  meal.name,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-
-                SizedBox(height: 20.h),
-
-                // Update Option
-                ListTile(
-                  leading: Container(
-                    padding: EdgeInsets.all(8.w),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Icon(Icons.edit, color: Colors.blue, size: 24.sp),
-                  ),
-                  title: Text(
-                    'Update Meal',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  subtitle: Text(
-                    'Edit meal information',
-                    style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    // Navigate to update screen using GoRouter
-                    context.push(AppRoutes.updateMealScreen, extra: meal);
-                  },
-                ),
-
-                // Delete Option
-                ListTile(
-                  leading: Container(
-                    padding: EdgeInsets.all(8.w),
-                    decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Icon(Icons.delete, color: Colors.red, size: 24.sp),
-                  ),
-                  title: Text(
-                    'Delete Meal',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  subtitle: Text(
-                    'Remove meal permanently',
-                    style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    _showDeleteConfirmation(context, actualMealKey, mealsBox);
-                  },
-                ),
-
-                SizedBox(height: 10.h),
-              ],
-            ),
-          ),
-    );
-  }
-
-  Widget _buildMealImage(String? imagePath) {
+  Widget _buildMealImage(String? imagePath, ColorScheme custom) {
     if (imagePath == null) {
-      return _buildPlaceholderImage();
+      return _buildPlaceholderImage(custom);
     }
 
     if (imagePath.startsWith("http")) {
-      // الصورة جايه من الانترنت
       return Image.network(
         imagePath,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) {
-          return _buildPlaceholderImage();
+          return _buildPlaceholderImage(custom);
         },
       );
     } else {
-      // الصورة جايه من الجهاز (camera/gallery)
       return Image.file(
         File(imagePath),
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) {
-          return _buildPlaceholderImage();
+          return _buildPlaceholderImage(custom);
         },
       );
     }
+  }
+
+  void _showOptionsBottomSheet(BuildContext context, int actualMealKey) {
+    final mealsBox = Hive.box<MealModel>('meals');
+    final colors = Theme.of(context).colorScheme;
+    final custom = colors;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: custom.apiMealCardBackground,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40.w,
+              height: 4.h,
+              decoration: BoxDecoration(
+                color: custom.switchInactiveText,
+                borderRadius: BorderRadius.circular(2.r),
+              ),
+            ),
+            SizedBox(height: 20.h),
+            Text(
+              meal.name,
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.bold,
+                color: custom.areaCardText,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20.h),
+            ListTile(
+              leading: Container(
+                padding: EdgeInsets.all(8.w),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Icon(Icons.edit, color: Colors.blue, size: 24.sp),
+              ),
+              title: Text(
+                'Update Meal',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  color: custom.areaCardText,
+                ),
+              ),
+              subtitle: Text(
+                'Edit meal information',
+                style: TextStyle(fontSize: 14.sp, color: custom.secondaryText),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                context.push(AppRoutes.updateMealScreen, extra: meal);
+              },
+            ),
+            ListTile(
+              leading: Container(
+                padding: EdgeInsets.all(8.w),
+                decoration: BoxDecoration(
+                  color: Colors.red.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Icon(Icons.delete, color: Colors.red, size: 24.sp),
+              ),
+              title: Text(
+                'Delete Meal',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  color: custom.areaCardText,
+                ),
+              ),
+              subtitle: Text(
+                'Remove meal permanently',
+                style: TextStyle(fontSize: 14.sp, color: custom.secondaryText),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                _showDeleteConfirmation(context, actualMealKey, mealsBox);
+              },
+            ),
+            SizedBox(height: 10.h),
+          ],
+        ),
+      ),
+    );
   }
 
   void _showDeleteConfirmation(
@@ -275,70 +265,73 @@ class MealCard extends StatelessWidget {
     int mealKey,
     Box<MealModel> mealsBox,
   ) {
+    final colors = Theme.of(context).colorScheme;
+    final custom = colors;
+
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        title: Row(
+          children: [
+            Icon(Icons.warning, color: custom.error, size: 24.sp),
+            SizedBox(width: 8.w),
+            Text(
+              'Delete Meal',
+              style: TextStyle(color: custom.areaCardText),
             ),
-            title: Row(
-              children: [
-                Icon(Icons.warning, color: Colors.red, size: 24.sp),
-                SizedBox(width: 8.w),
-                const Text('Delete Meal'),
-              ],
+          ],
+        ),
+        content: Text(
+          'Are you sure you want to delete "${meal.name}"? This action cannot be undone.',
+          style: TextStyle(fontSize: 16.sp, color: custom.areaCardText),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: custom.switchInactiveText, fontSize: 16.sp),
             ),
-            content: Text(
-              'Are you sure you want to delete "${meal.name}"? This action cannot be undone.',
-              style: TextStyle(fontSize: 16.sp),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(color: Colors.grey[600], fontSize: 16.sp),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-
-                  try {
-                    await mealsBox.delete(mealKey);
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('${meal.name} deleted successfully'),
-                          backgroundColor: Colors.red,
-                          duration: const Duration(seconds: 2),
-                        ),
-                      );
-                    }
-                  } catch (e) {
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Failed to delete meal: $e'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                ),
-                child: Text('Delete', style: TextStyle(fontSize: 16.sp)),
-              ),
-            ],
           ),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              try {
+                await mealsBox.delete(mealKey);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('${meal.name} deleted successfully'),
+                      backgroundColor: custom.error,
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                }
+              } catch (e) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Failed to delete meal: $e'),
+                      backgroundColor: custom.error,
+                    ),
+                  );
+                }
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: custom.error,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+            ),
+            child: Text('Delete', style: TextStyle(fontSize: 16.sp)),
+          ),
+        ],
+      ),
     );
   }
-  
 }

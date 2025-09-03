@@ -7,16 +7,17 @@ import 'package:meal_mate/features/settings/theme/manager/cubit/theme_cubit.dart
 import 'package:meal_mate/features/settings/theme/manager/cubit/theme_states.dart';
 import 'package:meal_mate/features/settings/widgets/custom_switch.dart';
 import 'package:meal_mate/core/theming/custom_colors.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme; // <--- use this
+    final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('settings'.tr()),
+        title: Text('Settings'.tr()),
         elevation: 0,
         backgroundColor: colors.background,
         foregroundColor: Theme.of(context).textTheme.bodyLarge?.color,
@@ -30,7 +31,7 @@ class SettingsPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
+                color: colors.areaCardBackground, // Use your custom card color
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
@@ -48,7 +49,7 @@ class SettingsPage extends StatelessWidget {
                       Icon(Icons.language, color: colors.primary, size: 24),
                       const SizedBox(width: 12),
                       Text(
-                        'language'.tr(),
+                        'Language'.tr(),
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -62,10 +63,10 @@ class SettingsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'choose_language'.tr(),
+                        'Choose language'.tr(),
                         style: TextStyle(
                           fontSize: 14,
-                          color: colors.secondaryText, // replaced
+                          color: colors.secondaryText,
                         ),
                       ),
                       BlocBuilder<LanguageCubit, LanguageState>(
@@ -74,11 +75,13 @@ class SettingsPage extends StatelessWidget {
                             isOn: state.languageCode == 'ar',
                             leftText: 'EN',
                             rightText: 'AR',
-                            activeColor: colors.yesButton, // green semantic
+                            activeColor: colors.yesButton,
                             inactiveColor: colors.switchInactiveText,
                             onToggle: (isArabic) {
                               final newLanguage = isArabic ? 'ar' : 'en';
-                              context.read<LanguageCubit>().changeLanguage(newLanguage);
+                              context.read<LanguageCubit>().changeLanguage(
+                                newLanguage,
+                              );
                               context.setLocale(Locale(newLanguage));
                             },
                           );
@@ -94,7 +97,7 @@ class SettingsPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
+                color: colors.areaCardBackground, // Use your custom card color
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
@@ -112,7 +115,9 @@ class SettingsPage extends StatelessWidget {
                       BlocBuilder<ThemeCubit, ThemeState>(
                         builder: (context, state) {
                           return Icon(
-                            state.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                            state.isDarkMode
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
                             color: colors.primary,
                             size: 24,
                           );
@@ -134,7 +139,7 @@ class SettingsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'choose_theme'.tr(),
+                        'Choose Theme'.tr(),
                         style: TextStyle(
                           fontSize: 14,
                           color: colors.secondaryText,
@@ -160,27 +165,8 @@ class SettingsPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
+
             // Additional Info
-            Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: colors.infoBackground,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: colors.infoBorder),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.info_outline, color: colors.primary, size: 20),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'settings_info'.tr(),
-                      style: TextStyle(fontSize: 12, color: colors.primary),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:meal_mate/core/theming/app_assets.dart';
-import 'package:meal_mate/core/theming/app_colors.dart';
+import 'package:meal_mate/core/theming/custom_colors.dart';
 import 'package:meal_mate/core/widgets/custom_painter.dart';
 import 'package:meal_mate/features/home_screen/custom_navigaton_bar/model/bottom_nav_items.dart';
 
@@ -22,16 +22,14 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return SizedBox(
       height: 90.h,
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.bottomCenter,
         children: [
-          
           CustomPaint(size: Size(1.sw, 75.h), painter: BNBCustomPainter()),
-
-          //floating center button
           Positioned(
             top: -10.h,
             child: GestureDetector(
@@ -41,9 +39,9 @@ class CustomBottomNavBar extends StatelessWidget {
                 width: 65.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.white,
+                  color: colors.surface,
                   boxShadow: [
-                    BoxShadow(color: Colors.black26, blurRadius: 5.r),
+                    BoxShadow(color: colors.elevationShadow, blurRadius: 5.r),
                   ],
                 ),
                 child: Center(
@@ -56,8 +54,6 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
             ),
           ),
-
-          /// الـ Bottom Navigation Bar
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -69,38 +65,35 @@ class CustomBottomNavBar extends StatelessWidget {
                   if (index == 2) return;
                   onTabSelected(index);
                 },
-                items:
-                    items.asMap().entries.map((entry) {
-                      int idx = entry.key;
-                      BottomNavItems item = entry.value;
-                      Color iconColor =
-                          (idx == currentIndex)
-                              ? AppColors.orange
-                              : AppColors.black;
+                items: items.asMap().entries.map((entry) {
+                  int idx = entry.key;
+                  BottomNavItems item = entry.value;
+                  Color iconColor =
+                      (idx == currentIndex) ? colors.primary : colors.onSurface;
 
-                      if (item.iconWidget == null) {
-                        return const BottomNavigationBarItem(
-                          icon: SizedBox.shrink(),
-                          label: '',
-                        );
-                      }
+                  if (item.iconWidget == null) {
+                    return const BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      label: '',
+                    );
+                  }
 
-                      return BottomNavigationBarItem(
-                        icon: Padding(
-                          padding: EdgeInsets.only(top: 1.0.h),
-                          child: IconTheme(
-                            data: IconThemeData(color: iconColor),
-                            child: item.iconWidget!,
-                          ),
-                        ),
-                        label: item.label,
-                      );
-                    }).toList(),
-                selectedItemColor: AppColors.black,
-                unselectedItemColor: AppColors.black,
+                  return BottomNavigationBarItem(
+                    icon: Padding(
+                      padding: EdgeInsets.only(top: 1.0.h),
+                      child: IconTheme(
+                        data: IconThemeData(color: iconColor),
+                        child: item.iconWidget!,
+                      ),
+                    ),
+                    label: item.label,
+                  );
+                }).toList(),
+                selectedItemColor: colors.primary,
+                unselectedItemColor: colors.onSurface,
                 showUnselectedLabels: true,
-                selectedLabelStyle: const TextStyle(color: AppColors.black),
-                unselectedLabelStyle: const TextStyle(color: Colors.black45),
+                selectedLabelStyle: TextStyle(color: colors.primary),
+                unselectedLabelStyle: TextStyle(color: colors.onSurfaceVariant),
                 type: BottomNavigationBarType.fixed,
               ),
             ),
@@ -110,3 +103,4 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 }
+

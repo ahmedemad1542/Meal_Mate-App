@@ -8,7 +8,6 @@ import 'package:meal_mate/features/online_meals/api_meal_details/data/repo/api_m
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_cubit.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_state.dart';
 
-
 import 'package:meal_mate/features/online_meals/mappers/api_meal_mapper.dart';
 
 class ApiMealDetailScreen extends StatelessWidget {
@@ -18,7 +17,8 @@ class ApiMealDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ApiMealDetailCubit(ApiMealDetailRepo())..getMealDetail(mealId),
+      create:
+          (_) => ApiMealDetailCubit(ApiMealDetailRepo())..getMealDetail(mealId),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -29,7 +29,8 @@ class ApiMealDetailScreen extends StatelessWidget {
             ),
           ),
           centerTitle: true,
-          backgroundColor: Theme.of(context).colorScheme.apiMealDetailBackground,
+          backgroundColor:
+              Theme.of(context).colorScheme.apiMealDetailBackground,
         ),
         body: BlocBuilder<ApiMealDetailCubit, ApiMealDetailState>(
           builder: (context, state) {
@@ -50,11 +51,15 @@ class ApiMealDetailScreen extends StatelessWidget {
                         child: Image.network(
                           meal.thumbnail,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Icon(
-                            Icons.broken_image,
-                            size: 80,
-                            color: Theme.of(context).colorScheme.brokenImageIcon,
-                          ),
+                          errorBuilder:
+                              (context, error, stackTrace) => Icon(
+                                Icons.broken_image,
+                                size: 80,
+                                color:
+                                    Theme.of(
+                                      context,
+                                    ).colorScheme.brokenImageIcon,
+                              ),
                         ),
                       ),
                     ),
@@ -101,7 +106,8 @@ class ApiMealDetailScreen extends StatelessWidget {
                                 color: Theme.of(context).colorScheme.onPrimary,
                               ),
                             ),
-                            backgroundColor: Theme.of(context).colorScheme.primary,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
                           ),
                         );
                       },
@@ -109,14 +115,19 @@ class ApiMealDetailScreen extends StatelessWidget {
                         Icons.download,
                         color: Theme.of(context).colorScheme.onPrimary,
                       ),
-                      label: Text(
-                        "Save Locally",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                      label: Center(
+                        child: Text(
+                          "Save This Meal",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor:
+                            Theme.of(context).brightness == Brightness.light
+                                ? Colors.orange
+                                : Colors.indigo.shade600,
                       ),
                     ),
                   ],
@@ -137,4 +148,3 @@ class ApiMealDetailScreen extends StatelessWidget {
     );
   }
 }
-
