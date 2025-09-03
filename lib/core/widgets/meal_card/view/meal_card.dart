@@ -193,11 +193,11 @@ class MealCard extends StatelessWidget {
             SizedBox(height: 20.h),
             Text(
               meal.name,
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: custom.areaCardText,
-              ),
+             style: TextStyle(
+    color: Theme.of(context).brightness == Brightness.light
+        ? Colors.black        
+        : Colors.white,    
+  ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20.h),
