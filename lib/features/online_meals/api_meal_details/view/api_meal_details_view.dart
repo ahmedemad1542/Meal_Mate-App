@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,6 @@ import 'package:meal_mate/core/theming/custom_colors.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/data/repo/api_meal_details_repo.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_cubit.dart';
 import 'package:meal_mate/features/online_meals/api_meal_details/manager/cubit/api_meal_details_state.dart';
-
 import 'package:meal_mate/features/online_meals/mappers/api_meal_mapper.dart';
 
 class ApiMealDetailScreen extends StatelessWidget {
@@ -22,7 +22,7 @@ class ApiMealDetailScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Meal Details",
+            "meal_details".tr(),
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.onSurface,
@@ -76,7 +76,7 @@ class ApiMealDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 16.h),
                     Text(
-                      "Instructions:",
+                      "instructions".tr(),
                       style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
@@ -101,7 +101,7 @@ class ApiMealDetailScreen extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              "Meal saved locally!",
+                             "meal_saved_locally".tr(),
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.onPrimary,
                               ),
@@ -117,7 +117,7 @@ class ApiMealDetailScreen extends StatelessWidget {
                       ),
                       label: Center(
                         child: Text(
-                          "Save This Meal",
+                         "save_this_meal".tr(),
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onPrimary,
                           ),

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
@@ -39,7 +40,7 @@ class _AddMealImageState extends State<AddMealImage> {
       child: Column(
         children: [
           Text(
-            'Meal Image',
+           "meal_image".tr(),
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
@@ -112,7 +113,7 @@ class _AddMealImageState extends State<AddMealImage> {
             ),
             SizedBox(height: 8.h),
             Text(
-              'Add Meal Photo',
+             "add_meal_image".tr(),
               style: TextStyle(
                 fontSize: 14.sp,
                 color: Colors.grey[600],
@@ -120,7 +121,7 @@ class _AddMealImageState extends State<AddMealImage> {
             ),
             SizedBox(height: 4.h),
             Text(
-              'Tap to choose from gallery or camera',
+             "choose_from_gallery_camera".tr(),
               style: TextStyle(
                 fontSize: 12.sp,
                 color: Colors.grey[500],
@@ -146,7 +147,7 @@ class _AddMealImageState extends State<AddMealImage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Select Image Source',
+                  "select_image_source".tr(),
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
@@ -158,7 +159,7 @@ class _AddMealImageState extends State<AddMealImage> {
                   children: [
                     ImageSourceOption(
                       icon: Icons.camera_alt,
-                      label: 'Camera',
+                      label: "camera".tr(),
                       onTap: () {
                         Navigator.pop(context);
                         _pickImageFromSource(ImageSource.camera);
@@ -166,7 +167,7 @@ class _AddMealImageState extends State<AddMealImage> {
                     ),
                     ImageSourceOption(
                       icon: Icons.photo_library,
-                      label: 'Gallery',
+                      label: "gallery".tr(),
                       onTap: () {
                         Navigator.pop(context);
                         _pickImageFromSource(ImageSource.gallery);

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,7 @@ class WelcomeImageHome extends StatelessWidget {
             left: 16,
             bottom: 16,
             child: Text(
-              "Welcome Back",
+               "welcome_back".tr(),
               style: TextStyle(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.bold,

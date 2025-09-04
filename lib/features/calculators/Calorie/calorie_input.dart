@@ -1,12 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meal_mate/features/calculators/Calorie/calorie_output.dart';
 
 import '../widgets/custom_calculator_text_field.dart';
-
-
-
 
 class CalorieInputScreen extends StatefulWidget {
   const CalorieInputScreen({super.key});
@@ -19,16 +17,16 @@ class _CalorieInputScreenState extends State<CalorieInputScreen> {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
-  String gender = 'Male';
-  String goal = 'Maintain Weight';
-  String activityLevel = 'Sedentary';
+  String gender = "male".tr();
+  String goal = "maintain_weight".tr();
+  String activityLevel = "sedentary".tr();
 
   final List<String> activityLevels = [
-    'Sedentary',
-    'Lightly Active',
-    'Moderately Active',
-    'Very Active',
-    'Super Active',
+    "sedentary".tr(),
+    "lightly_active".tr(),
+    "moderately_active".tr(),
+    "very_active".tr(),
+    "super_active".tr(),
   ];
 
   @override
@@ -37,9 +35,10 @@ class _CalorieInputScreenState extends State<CalorieInputScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF65B741),
         leading: IconButton(
-          icon: SvgPicture.asset("assets/icons/arrow_back.svg"),
+          icon: Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
         ),
+        centerTitle: true,
         title: Text(
           "Calorie Calculator",
           style: TextStyle(
@@ -56,29 +55,29 @@ class _CalorieInputScreenState extends State<CalorieInputScreen> {
           children: [
             CustomCalculatorTextField(
               controller: ageController,
-              hintText: "Enter your Age",
+              hintText: "enter_your_age".tr(),
               inputType: TextInputType.number,
-              label: 'Age',
+              label: "age".tr(),
             ),
             SizedBox(height: 25.h),
             CustomCalculatorTextField(
               controller: heightController,
-              hintText: "Enter your Height (cm)",
-              label: 'Height (cm)',
+              hintText: "enter_your_height".tr(),
+              label: "height".tr(),
               inputType: TextInputType.number,
             ),
             SizedBox(height: 25.h),
             CustomCalculatorTextField(
               controller: weightController,
-              hintText: "Enter your Weight (kg)",
+              hintText: "enter_your_weight".tr(),
               inputType: TextInputType.number,
-              label: 'Weight (kg)',
+              label: "weight".tr(),
             ),
             SizedBox(height: 25.h),
             DropdownButtonFormField<String>(
               value: gender,
               decoration: InputDecoration(
-                labelText: 'Gender',
+                labelText: "gender".tr(),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
@@ -88,7 +87,7 @@ class _CalorieInputScreenState extends State<CalorieInputScreen> {
                 ),
               ),
               items:
-                  ['Male', 'Female'].map((String value) {
+                  ["male".tr(), "female".tr()].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -101,7 +100,7 @@ class _CalorieInputScreenState extends State<CalorieInputScreen> {
               value: goal,
               isExpanded: true,
               decoration: InputDecoration(
-                labelText: 'Goal',
+                labelText: "goal".tr(),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
@@ -111,9 +110,11 @@ class _CalorieInputScreenState extends State<CalorieInputScreen> {
                 ),
               ),
               items:
-                  ['Lose Weight', 'Maintain Weight', 'Gain Weight'].map((
-                    String value,
-                  ) {
+                  [
+                    "lose_weight".tr(),
+                    "maintain_weight".tr(),
+                    "gain_weight".tr(),
+                  ].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -121,12 +122,13 @@ class _CalorieInputScreenState extends State<CalorieInputScreen> {
                   }).toList(),
               onChanged: (value) => setState(() => goal = value!),
             ),
+
             SizedBox(height: 25.h),
             DropdownButtonFormField<String>(
               value: activityLevel,
               isExpanded: true,
               decoration: InputDecoration(
-                labelText: 'Activity Level',
+                labelText: "activity_level".tr(),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
@@ -169,8 +171,8 @@ class _CalorieInputScreenState extends State<CalorieInputScreen> {
                   borderRadius: BorderRadius.circular(12.0),
                 ),
               ),
-              child: const Text(
-                'Calculate',
+              child: Text(
+                "calc".tr(),
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),

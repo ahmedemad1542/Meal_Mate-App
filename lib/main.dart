@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,9 +32,18 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(MealModelAdapter());
   await Hive.openBox<MealModel>('meals');
-  await dotenv.load(fileName: ".env");
 
-  runApp(const MyApp());
+  await dotenv.load(fileName: ".env");
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -49,18 +59,13 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => AddMealCubit(LocalMealsRepo())),
             BlocProvider(create: (_) => AreaCubit(AreaRepo())..getAreas()),
-            BlocProvider(
-              create: (_) => CategoryCubit(CategoryRepo())..getCategories(),
-            ),
+            BlocProvider(create: (_) => CategoryCubit(CategoryRepo())..getCategories()),
             BlocProvider(create: (_) => ApiMealCubit(ApiMealsRepo())),
             BlocProvider(create: (_) => ChatCubit(ChatRepo())),
-            BlocProvider(
-              create: (_) => ApiMealDetailCubit(ApiMealDetailRepo()),
-            ),
+            BlocProvider(create: (_) => ApiMealDetailCubit(ApiMealDetailRepo())),
             BlocProvider(create: (_) => LanguageCubit()),
             BlocProvider(create: (_) => ThemeCubit()),
           ],
-
           child: BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, state) {
               return MaterialApp.router(
@@ -70,6 +75,11 @@ class MyApp extends StatelessWidget {
                 darkTheme: AppTheme.darkTheme,
                 themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 routerConfig: RouterGenerationConfig.goRouter,
+
+                // Easy Localization
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
               );
             },
           ),

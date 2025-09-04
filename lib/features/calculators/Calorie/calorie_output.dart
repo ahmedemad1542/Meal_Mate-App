@@ -1,12 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CalorieOutputScreen extends StatelessWidget {
   final int age;
   final double height;
   final double weight;
-  final String gender;
-  final String goal;
-  final String activityLevel;
+  final String gender;     
+  final String goal;        
+  final String activityLevel; 
 
   const CalorieOutputScreen({
     super.key,
@@ -19,7 +20,7 @@ class CalorieOutputScreen extends StatelessWidget {
   });
 
   double calculateBMR() {
-    if (gender == 'Male') {
+    if (gender == "male") {
       return 10 * weight + 6.25 * height - 5 * age + 5;
     } else {
       return 10 * weight + 6.25 * height - 5 * age - 161;
@@ -28,15 +29,15 @@ class CalorieOutputScreen extends StatelessWidget {
 
   double getActivityFactor() {
     switch (activityLevel) {
-      case 'Sedentary':
+      case "sedentary":
         return 1.2;
-      case 'Lightly Active':
+      case "lightly_active":
         return 1.375;
-      case 'Moderately Active':
+      case "moderately_active":
         return 1.55;
-      case 'Very Active':
+      case "very_active":
         return 1.725;
-      case 'Super Active':
+      case "super_active":
         return 1.9;
       default:
         return 1.2;
@@ -48,11 +49,11 @@ class CalorieOutputScreen extends StatelessWidget {
     final tdee = bmr * getActivityFactor();
 
     switch (goal) {
-      case 'Lose Weight':
+      case "lose_weight":
         return tdee - 500;
-      case 'Gain Weight':
+      case "gain_weight":
         return tdee + 500;
-      case 'Maintain Weight':
+      case "maintain_weight":
       default:
         return tdee;
     }
@@ -66,24 +67,18 @@ class CalorieOutputScreen extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: RichText(
+          child: Text(
+            "calorie_message".tr(
+              namedArgs: {
+                "calories": calories.toString(),
+                "goal": goal.tr(), 
+              },
+            ),
             textAlign: TextAlign.center,
-            text: TextSpan(
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-              children: [
-                const TextSpan(text: "You need approximately\n"),
-                TextSpan(
-                  text: "$calories calories\n",
-                  style: const TextStyle(color: Colors.green),
-                ),
-                const TextSpan(text: "per day to "),
-                TextSpan(text: goal, style: const TextStyle(color: Colors.red)),
-                const TextSpan(text: "."),
-              ],
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
         ),
@@ -91,3 +86,4 @@ class CalorieOutputScreen extends StatelessWidget {
     );
   }
 }
+

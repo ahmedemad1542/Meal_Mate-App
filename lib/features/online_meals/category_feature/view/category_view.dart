@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_mate/core/theming/custom_colors.dart';
@@ -16,7 +17,7 @@ class ApiCategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Categories in $area",
+          tr("categories_in", namedArgs: {"area": area}),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color:

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ExitAlertDialog extends StatelessWidget {
@@ -24,8 +25,8 @@ class ExitAlertDialog extends StatelessWidget {
           style: TextButton.styleFrom(
             foregroundColor: colors.error,
           ),
-          child: const Text(
-            'No',
+          child:  Text(
+            'No'.tr(),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -34,8 +35,8 @@ class ExitAlertDialog extends StatelessWidget {
           style: TextButton.styleFrom(
             foregroundColor: colors.primary,
           ),
-          child: const Text(
-            'Yes',
+          child:  Text(
+            'Yes'.tr(),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),

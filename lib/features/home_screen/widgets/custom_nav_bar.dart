@@ -1,10 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:meal_mate/core/theming/app_assets.dart';
 import 'package:meal_mate/core/theming/custom_colors.dart';
 import 'package:meal_mate/core/widgets/custom_painter.dart';
-import 'package:meal_mate/features/home_screen/custom_navigaton_bar/model/bottom_nav_items.dart';
+
+import '../custom_navigaton_bar/model/bottom_nav_items.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -23,6 +25,7 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+
     return SizedBox(
       height: 90.h,
       child: Stack(
@@ -65,33 +68,31 @@ class CustomBottomNavBar extends StatelessWidget {
                   if (index == 2) return;
                   onTabSelected(index);
                 },
-                items:
-                    items.asMap().entries.map((entry) {
-                      int idx = entry.key;
-                      BottomNavItems item = entry.value;
-                      Color iconColor =
-                          (idx == currentIndex)
-                              ? colors.primary
-                              : colors.onSurface;
+                items: items.asMap().entries.map((entry) {
+                  int idx = entry.key;
+                  BottomNavItems item = entry.value;
+                  Color iconColor =
+                      (idx == currentIndex) ? colors.primary : colors.onSurface;
 
-                      if (item.iconWidget == null) {
-                        return const BottomNavigationBarItem(
-                          icon: SizedBox.shrink(),
-                          label: '',
-                        );
-                      }
+                  if (item.iconWidget == null) {
+                    return const BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      label: '',
+                    );
+                  }
 
-                      return BottomNavigationBarItem(
-                        icon: Padding(
-                          padding: EdgeInsets.only(top: 1.0.h),
-                          child: IconTheme(
-                            data: IconThemeData(color: iconColor),
-                            child: item.iconWidget!,
-                          ),
-                        ),
-                        label: item.label,
-                      );
-                    }).toList(),
+                 
+                  return BottomNavigationBarItem(
+                    icon: Padding(
+                      padding: EdgeInsets.only(top: 1.0.h),
+                      child: IconTheme(
+                        data: IconThemeData(color: iconColor),
+                        child: item.iconWidget!,
+                      ),
+                    ),
+                    label: tr(item.label),
+                  );
+                }).toList(),
                 type: BottomNavigationBarType.fixed,
                 showUnselectedLabels: true,
                 selectedItemColor: Colors.black,

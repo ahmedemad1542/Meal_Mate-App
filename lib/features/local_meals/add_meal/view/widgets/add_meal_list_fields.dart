@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/features/local_meals/add_meal/view/widgets/custom_textform.dart';
@@ -21,51 +22,51 @@ class AddMealListFields extends StatelessWidget {
     return Column(
       children: [
         CustomTextFormField(
-          label: 'Meal Name',
+          label:"meal_name".tr(),
           controller: mealNameController,
           validator: (value) =>
-              value == null || value.isEmpty ? "Enter meal name" : null,
+              value == null || value.isEmpty ?"enter_meal_name".tr() : null,
         ),
         SizedBox(height: 30.h),
         CustomTextFormField(
-          label: 'Cooking Time (minutes)',
+          label: "cooking_time".tr(),
           controller: cookingTimeController,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Enter cooking time";
+              return "enter_cooking_time".tr();
             }
             if (int.tryParse(value) == null) {
-              return "Enter a valid number";
+              return "enter_valid_number".tr();
             }
             if (int.parse(value) <= 0) {
-              return "Cooking time must be greater than 0";
+              return"cooking_time_greater_than_zero".tr();
             }
             return null;
           },
         ),
         SizedBox(height: 30.h),
         CustomTextFormField(
-          label: 'Description',
+          label: "discription".tr(),
           controller: descriptionController,
           validator: (value) =>
-              value == null || value.isEmpty ? "Enter description" : null,
+              value == null || value.isEmpty ? "Enter description".tr() : null,
         ),
         SizedBox(height: 30.h),
         CustomTextFormField(
-          label: 'Rating',
+          label:  "rating".tr(),
           controller: ratingController,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Enter rating";
+              return "enter_rating".tr();
             }
 
             final rating = double.tryParse(value);
             if (rating == null) {
-              return "Enter a valid number";
+              return "enter_valid_number".tr();
             }
 
             if (rating < 0 || rating > 5) {
-              return "Rating must be between 0 and 5";
+              return "rating_must_be_between_0_and_5".tr();
             }
 
             return null;

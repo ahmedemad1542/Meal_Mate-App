@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +46,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               Text(
-                "Your Cooking Assistant",
+                "your_cooking_assistant".tr(),
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: colors.onPrimary.withOpacity(0.7),
@@ -71,7 +72,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Icon(Icons.clear_all, size: 20.sp, color: colors.onSurface),
                   SizedBox(width: 8.w),
                   Text(
-                    'Clear Chat',
+                    "clear_chat".tr(),
                     style: TextStyle(fontSize: 14.sp, color: colors.onSurface),
                   ),
                 ],

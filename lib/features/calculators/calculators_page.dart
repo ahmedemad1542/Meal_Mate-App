@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/features/calculators/BMI/gender_screen.dart';
@@ -10,7 +11,7 @@ class CalculatorsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Calculators"),
+      appBar: AppBar(title: Text( "calculators".tr()),
       centerTitle: true,),
       body: Padding(
         padding: const EdgeInsets.only(top: 30.0),
@@ -29,7 +30,7 @@ class CalculatorsPage extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'BMI Calculator',
+                     "bmi_calc".tr(),
                       style: TextStyle(
                         fontSize: 24.sp,
                         color: const Color(0xff0A1207),
@@ -55,7 +56,7 @@ class CalculatorsPage extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Calorie Calculator',
+                      "calorie_calc".tr(),
                       style: TextStyle(
                         fontSize: 24.sp,
                         color: const Color(0xff0A1207),

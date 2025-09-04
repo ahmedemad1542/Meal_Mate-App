@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +22,7 @@ class UpdateMealInfoBanner extends StatelessWidget {
           SizedBox(width: 8.w),
           Expanded(
             child: Text(
-              'Updating: $mealName',
+              "updating".tr(namedArgs: {"meal": mealName}),
               style: TextStyle(
                 fontSize: 14.sp,
                 color: Colors.blue,

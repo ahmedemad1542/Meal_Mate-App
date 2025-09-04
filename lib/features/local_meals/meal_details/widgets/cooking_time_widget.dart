@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +22,8 @@ class CookingTimeWidget extends StatelessWidget {
           Icon(Icons.access_time, color: Colors.orange, size: 18.sp),
           SizedBox(width: 6.w),
           Text(
-            '$cookingTime minutes',
+            "minutes".tr(namedArgs: {"time": cookingTime.toString()}),
+
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,

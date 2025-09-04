@@ -17,7 +17,7 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'.tr()),
+        title: Text("settings".tr()),
         elevation: 0,
         backgroundColor: colors.background,
         foregroundColor: Theme.of(context).textTheme.bodyLarge?.color,
@@ -49,7 +49,7 @@ class SettingsPage extends StatelessWidget {
                       Icon(Icons.language, color: colors.primary, size: 24),
                       const SizedBox(width: 12),
                       Text(
-                        'Language'.tr(),
+                        "language".tr(),
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class SettingsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Choose language'.tr(),
+                        "choose_language".tr(),
                         style: TextStyle(
                           fontSize: 14,
                           color: colors.secondaryText,
@@ -125,7 +125,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'Theme'.tr(),
+                        "theme".tr(),
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -139,7 +139,7 @@ class SettingsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Choose Theme'.tr(),
+                        "choose_theme".tr(),
                         style: TextStyle(
                           fontSize: 14,
                           color: colors.secondaryText,
@@ -149,8 +149,8 @@ class SettingsPage extends StatelessWidget {
                         builder: (context, state) {
                           return CustomSwitch(
                             isOn: state.isDarkMode,
-                            leftText: 'Light',
-                            rightText: 'Dark',
+                            leftText: "light".tr(),
+                            rightText: "dark".tr(),
                             activeColor: colors.themeActiveColor,
                             inactiveColor: colors.themeInactiveColor,
                             onToggle: (_) {

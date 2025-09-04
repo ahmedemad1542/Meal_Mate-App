@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,7 +37,7 @@ class ChatInput extends StatelessWidget {
                 child: TextField(
                   controller: controller,
                   decoration: InputDecoration(
-                    hintText: "What ingredients do you have?",
+                    hintText: "what_ingredients_do_you_have?".tr(),
                     hintStyle: TextStyle(color: colors.onSurfaceVariant),
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(

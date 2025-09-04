@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
@@ -37,7 +38,8 @@ class CustomTextFormField extends StatelessWidget {
             validator ??
             (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter $label';
+               return "please_enter".tr(namedArgs: {"field": label});
+
               }
               return null;
             },

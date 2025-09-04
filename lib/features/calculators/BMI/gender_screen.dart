@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -46,13 +47,14 @@ class _GenderScreenState extends State<GenderScreen> {
                     fontSize: 32.sp,
                     fontWeight: FontWeight.w600,
                   ),
-                  children: const [
+                  children:  [
                     TextSpan(
                       text: 'BMI ',
                       style: TextStyle(color: Color(0xFFFFB534)),
                     ),
                     TextSpan(
-                      text: 'Calculator',
+                      text: "calculator".tr()
+                      ,
                       style: TextStyle(color: Color(0xFF65B741)),
                     ),
                   ],
@@ -61,7 +63,7 @@ class _GenderScreenState extends State<GenderScreen> {
             ),
             SizedBox(height: 40.h),
             Text(
-              'Please choose your gender',
+              "select_gender".tr(),
               style: TextStyle(
                 fontSize: 24.sp,
                 color: const Color(0xff0A1207),
@@ -72,7 +74,7 @@ class _GenderScreenState extends State<GenderScreen> {
 
             // Male Container
             GestureDetector(
-              onTap: () => selectGender("Male"),
+              onTap: () => selectGender("male".tr()),
               child: Container(
                 width: 360.w,
                 height: 180.h,
@@ -81,7 +83,7 @@ class _GenderScreenState extends State<GenderScreen> {
                   borderRadius: BorderRadius.circular(30.r),
                   border: Border.all(
                     color:
-                        selectedGender == "Male"
+                        selectedGender == "male".tr()
                             ? Colors.blue
                             : Colors.transparent,
                     width: 3,
@@ -92,7 +94,7 @@ class _GenderScreenState extends State<GenderScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 60),
                       child: Text(
-                        'Male',
+                        "male".tr(),
                         style: TextStyle(
                           fontSize: 24.sp,
                           color: const Color(0xff519234),
@@ -110,7 +112,7 @@ class _GenderScreenState extends State<GenderScreen> {
 
             // Female Container
             GestureDetector(
-              onTap: () => selectGender("Female"),
+              onTap: () => selectGender("female".tr()),
               child: Container(
                 width: 360.w,
                 height: 180.h,
@@ -119,7 +121,7 @@ class _GenderScreenState extends State<GenderScreen> {
                   borderRadius: BorderRadius.circular(30.r),
                   border: Border.all(
                     color:
-                        selectedGender == "Female"
+                        selectedGender == "female".tr()
                             ? Colors.pink
                             : Colors.transparent,
                     width: 3,
@@ -131,7 +133,7 @@ class _GenderScreenState extends State<GenderScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Female',
+                          "female".tr(),
                           style: TextStyle(
                             fontSize: 24.sp,
                             color: const Color(0xffCE922A),
@@ -156,8 +158,8 @@ class _GenderScreenState extends State<GenderScreen> {
                 minimumSize: Size(340.w, 70.h),
               ),
               onPressed: selectedGender == null ? null : goToInputScreen,
-              child: const Text(
-                'Continue',
+              child:  Text(
+                "continue".tr(),
                 style: TextStyle(color: Colors.white),
               ),
             ),

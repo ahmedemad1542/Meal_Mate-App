@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -20,9 +21,9 @@ class GridviewMealcard extends StatelessWidget {
         if (meals.isEmpty) {
           return SizedBox(
             height: 0.5.sh,
-            child: const Center(
+            child:  Center(
               child: Text(
-                "You don't have any\n saved meals yet\n press the add button\n to add a new meal",
+                "no_meals".tr(),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ruler_picker/flutter_ruler_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,6 @@ import 'package:meal_mate/features/calculators/widgets/height_picker_box.dart';
 import 'package:meal_mate/features/calculators/widgets/input_box.dart';
 import 'package:meal_mate/features/calculators/widgets/input_header_text.dart';
 import 'package:meal_mate/features/calculators/widgets/result_dialog.dart';
-
 
 class InputScreen extends StatefulWidget {
   final String gender;
@@ -24,8 +24,7 @@ class _InputScreenState extends State<InputScreen> {
   @override
   void initState() {
     super.initState();
-   _rulerPickerController = RulerPickerController(value: height.toDouble());
-
+    _rulerPickerController = RulerPickerController(value: height.toDouble());
   }
 
   @override
@@ -35,10 +34,10 @@ class _InputScreenState extends State<InputScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const InputHeaderText(),
+              /* const InputHeaderText(),*/
               SizedBox(height: 40.h),
               Text(
-                'Please Modify the values',
+                "modify_values".tr(),
                 style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 20.h),
@@ -46,21 +45,23 @@ class _InputScreenState extends State<InputScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InputBox(
-                    label: 'Weight',
+                    label: "weight".tr(),
                     value: weight,
                     onIncrement: () => setState(() => weight++),
-                    onDecrement: () => setState(() {
-                      if (weight > 0) weight--;
-                    }),
+                    onDecrement:
+                        () => setState(() {
+                          if (weight > 0) weight--;
+                        }),
                   ),
                   SizedBox(width: 30.w),
                   InputBox(
-                    label: 'Age',
+                    label: "age".tr(),
                     value: age,
                     onIncrement: () => setState(() => age++),
-                    onDecrement: () => setState(() {
-                      if (age > 0) age--;
-                    }),
+                    onDecrement:
+                        () => setState(() {
+                          if (age > 0) age--;
+                        }),
                   ),
                 ],
               ),
@@ -80,8 +81,7 @@ class _InputScreenState extends State<InputScreen> {
                   minimumSize: const Size(340, 70),
                 ),
                 onPressed: () {
-                  double bmi =
-                      weight / ((height / 100) * (height / 100));
+                  double bmi = weight / ((height / 100) * (height / 100));
                   showResultDialog(
                     context,
                     bmi,
@@ -91,8 +91,8 @@ class _InputScreenState extends State<InputScreen> {
                     widget.gender,
                   );
                 },
-                child: const Text(
-                  'Calculate',
+                child:  Text(
+                  "calc".tr(),
                   style: TextStyle(color: Colors.white),
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meal_mate/core/theming/app_assets.dart';
@@ -5,12 +6,12 @@ import 'package:meal_mate/core/theming/app_colors.dart';
 
 import 'package:meal_mate/features/calculators/calculators_page.dart';
 import 'package:meal_mate/features/chat_bot/view/chatbot_screen.dart';
-
 import 'package:meal_mate/features/home_screen/custom_navigaton_bar/model/bottom_nav_items.dart';
 import 'package:meal_mate/features/home_screen/home_screen.dart';
 import 'package:meal_mate/features/home_screen/widgets/custom_nav_bar.dart';
 import 'package:meal_mate/features/online_meals/area_feature/view/area_view.dart';
 import 'package:meal_mate/features/settings/view/settings_page.dart';
+
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -22,7 +23,6 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   int _currentIndex = 0;
 
-  // Helper Method
   Widget _buildSvgIcon(String asset, int iconIndex) {
     return SvgPicture.asset(
       asset,
@@ -32,45 +32,45 @@ class _BaseScreenState extends State<BaseScreen> {
     );
   }
 
-  List<BottomNavItems> get _items => [
-        BottomNavItems(
-          page: const HomeScreen(),
-          iconWidget:  _buildSvgIcon(AppAssets.homeicon, 0),
-          label: 'Home',
-          
-        ),
-        BottomNavItems(
-          page: AreasScreen(),
-          iconWidget: _buildSvgIcon(AppAssets.discover, 1),
-          label: 'Online',
-        ),
-        BottomNavItems(
-          page: ChatScreen(),
-          iconWidget: null,
-          label: '',
-        ),
-        BottomNavItems(
-          page: CalculatorsPage(),
-          iconWidget: _buildSvgIcon(AppAssets.calculator, 3),
-          label: 'Calculators',
-        ),
-        BottomNavItems(
-          page:SettingsPage(),
-          iconWidget: _buildSvgIcon(AppAssets.settings, 4),
-          label: 'Settings',
-        ),
-      ];
-
   @override
   Widget build(BuildContext context) {
+    // نستخدم المفاتيح فقط (labels) بدل النصوص المترجمة
+    final items = [
+      BottomNavItems(
+        page: const HomeScreen(),
+        iconWidget: _buildSvgIcon(AppAssets.homeicon, 0),
+        label: "home",
+      ),
+      BottomNavItems(
+        page: AreasScreen(),
+        iconWidget: _buildSvgIcon(AppAssets.discover, 1),
+        label: "discover",
+      ),
+      BottomNavItems(
+        page: ChatScreen(),
+        iconWidget: null,
+        label: '',
+      ),
+      BottomNavItems(
+        page: const CalculatorsPage(),
+        iconWidget: _buildSvgIcon(AppAssets.calculator, 3),
+        label: "calculators",
+      ),
+      BottomNavItems(
+        page: const SettingsPage(),
+        iconWidget: _buildSvgIcon(AppAssets.settings, 4),
+        label: "settings",
+      ),
+    ];
+
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
-        children: _items.map((e) => e.page).toList(),
+        children: items.map((e) => e.page).toList(),
       ),
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
-        items: _items,
+        items: items,
         onTabSelected: (index) {
           setState(() {
             _currentIndex = index;

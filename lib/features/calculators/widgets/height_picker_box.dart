@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ruler_picker/flutter_ruler_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,7 @@ class HeightPickerBox extends StatelessWidget {
         children: [
           SizedBox(height: 25.h),
           Text(
-            'Height (cm)',
+            "height".tr(),
             style: TextStyle(
               fontSize: 16.sp,
               color: const Color(0xffACACAC),
@@ -45,10 +46,10 @@ class HeightPickerBox extends StatelessWidget {
           ),
           SizedBox(
             width: 320.w,
-            height: 61.h,
+            height: 58.h,
             child: RulerPicker(
               controller: controller,
-              onValueChanged: (value) => onChanged(value.toInt()-2),
+              onValueChanged: (value) => onChanged(value.toInt() - 2),
               onBuildRulerScaleText: (index, value) => value.toInt().toString(),
               ranges: const [RulerRange(begin: 100, end: 250, scale: 1)],
               scaleLineStyleList: const [
