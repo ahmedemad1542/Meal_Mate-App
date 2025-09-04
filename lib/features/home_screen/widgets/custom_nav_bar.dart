@@ -65,36 +65,43 @@ class CustomBottomNavBar extends StatelessWidget {
                   if (index == 2) return;
                   onTabSelected(index);
                 },
-                items: items.asMap().entries.map((entry) {
-                  int idx = entry.key;
-                  BottomNavItems item = entry.value;
-                  Color iconColor =
-                      (idx == currentIndex) ? colors.primary : colors.onSurface;
+                items:
+                    items.asMap().entries.map((entry) {
+                      int idx = entry.key;
+                      BottomNavItems item = entry.value;
+                      Color iconColor =
+                          (idx == currentIndex)
+                              ? colors.primary
+                              : colors.onSurface;
 
-                  if (item.iconWidget == null) {
-                    return const BottomNavigationBarItem(
-                      icon: SizedBox.shrink(),
-                      label: '',
-                    );
-                  }
+                      if (item.iconWidget == null) {
+                        return const BottomNavigationBarItem(
+                          icon: SizedBox.shrink(),
+                          label: '',
+                        );
+                      }
 
-                  return BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: EdgeInsets.only(top: 1.0.h),
-                      child: IconTheme(
-                        data: IconThemeData(color: iconColor),
-                        child: item.iconWidget!,
-                      ),
-                    ),
-                    label: item.label,
-                  );
-                }).toList(),
-                selectedItemColor: colors.primary,
-                unselectedItemColor: colors.onSurface,
-                showUnselectedLabels: true,
-                selectedLabelStyle: TextStyle(color: colors.primary),
-                unselectedLabelStyle: TextStyle(color: colors.onSurfaceVariant),
+                      return BottomNavigationBarItem(
+                        icon: Padding(
+                          padding: EdgeInsets.only(top: 1.0.h),
+                          child: IconTheme(
+                            data: IconThemeData(color: iconColor),
+                            child: item.iconWidget!,
+                          ),
+                        ),
+                        label: item.label,
+                      );
+                    }).toList(),
                 type: BottomNavigationBarType.fixed,
+                showUnselectedLabels: true,
+                selectedItemColor: Colors.black,
+                unselectedItemColor: Colors.black.withOpacity(0.6),
+                selectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+                unselectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           ),
@@ -103,4 +110,3 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 }
-

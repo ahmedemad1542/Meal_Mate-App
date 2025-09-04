@@ -15,20 +15,20 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       elevation: 0,
-      backgroundColor: colors.primary, // بدل AppColors.orange
-      foregroundColor: colors.onPrimary, // النصوص والـ icons فوق الـ primary
+      backgroundColor: colors.primary, 
+      foregroundColor: colors.onPrimary,
       title: Row(
         children: [
           Container(
             width: 40.w,
             height: 40.w,
             decoration: BoxDecoration(
-              color: colors.onPrimary, // أبيض في light / غامق في dark
+              color: colors.onPrimary, 
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.restaurant_menu,
-              color: colors.primary, // نفس الـ primary color
+              color: colors.primary, 
               size: 24.sp,
             ),
           ),
@@ -41,7 +41,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
-                  color: colors.onPrimary, // عشان يبان فوق الـ primary
+                  color: colors.onPrimary, 
                 ),
               ),
               Text(

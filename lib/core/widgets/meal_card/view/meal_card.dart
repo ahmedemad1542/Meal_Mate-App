@@ -22,7 +22,7 @@ class MealCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final mealsBox = Hive.box<MealModel>('meals');
     final colors = Theme.of(context).colorScheme;
-    final custom = colors; // CustomColors extension على ColorScheme
+    final custom = colors; 
     final actualMealKey =
         mealKey ??
         mealsBox.keys.firstWhere(

@@ -24,4 +24,5 @@ class AppAssets {
   static const String calculator = '${iconPath}keys.svg';
   static const String settings = '${iconPath}setting.svg';
   static const String discover = '${iconPath}restaurant.svg';
+  static const String homeicon = '${iconPath}home.svg';
 }

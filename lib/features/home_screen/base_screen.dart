@@ -22,7 +22,7 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   int _currentIndex = 0;
 
-  /// 🔹 Helper Method
+  // Helper Method
   Widget _buildSvgIcon(String asset, int iconIndex) {
     return SvgPicture.asset(
       asset,
@@ -35,11 +35,9 @@ class _BaseScreenState extends State<BaseScreen> {
   List<BottomNavItems> get _items => [
         BottomNavItems(
           page: const HomeScreen(),
-          iconWidget: Icon(
-            Icons.home,
-            color: _currentIndex == 0 ? AppColors.orange : AppColors.black,
-          ),
+          iconWidget:  _buildSvgIcon(AppAssets.homeicon, 0),
           label: 'Home',
+          
         ),
         BottomNavItems(
           page: AreasScreen(),
