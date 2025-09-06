@@ -35,13 +35,9 @@ class _CustomSwitchState extends State<CustomSwitch>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _animation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
 
     if (widget.isOn) {
       _animationController.value = 1.0;
@@ -52,7 +48,9 @@ class _CustomSwitchState extends State<CustomSwitch>
   void didUpdateWidget(CustomSwitch oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isOn != oldWidget.isOn) {
-      widget.isOn ? _animationController.forward() : _animationController.reverse();
+      widget.isOn
+          ? _animationController.forward()
+          : _animationController.reverse();
     }
   }
 
@@ -82,14 +80,16 @@ class _CustomSwitchState extends State<CustomSwitch>
               builder: (context, child) {
                 return Positioned(
                   left: _animation.value * 60,
-                  top: 4,
+                  top: 1,
                   child: Container(
                     width: 56,
-                    height: 42,
+                    height: 44,
                     decoration: BoxDecoration(
-                      color: widget.isOn
-                          ? (widget.activeColor ?? colors.primary)
-                          : (widget.inactiveColor ?? colors.switchInactiveText),
+                      color:
+                          widget.isOn
+                              ? (widget.activeColor ?? colors.primary)
+                              : (widget.inactiveColor ??
+                                  colors.switchInactiveText),
                       borderRadius: BorderRadius.circular(21),
                       boxShadow: [
                         BoxShadow(
@@ -111,9 +111,10 @@ class _CustomSwitchState extends State<CustomSwitch>
                 child: Text(
                   widget.leftText,
                   style: TextStyle(
-                    color: !widget.isOn
-                        ? colors.switchActiveText
-                        : colors.switchInactiveText,
+                    color:
+                        !widget.isOn
+                            ? colors.switchActiveText
+                            : colors.switchInactiveText,
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -128,9 +129,10 @@ class _CustomSwitchState extends State<CustomSwitch>
                 child: Text(
                   widget.rightText,
                   style: TextStyle(
-                    color: widget.isOn
-                        ? colors.switchActiveText
-                        : colors.switchInactiveText,
+                    color:
+                        widget.isOn
+                            ? colors.switchActiveText
+                            : colors.switchInactiveText,
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
