@@ -4,7 +4,6 @@ import 'package:flutter_ruler_picker/flutter_ruler_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/features/calculators/widgets/height_picker_box.dart';
 import 'package:meal_mate/features/calculators/widgets/input_box.dart';
-import 'package:meal_mate/features/calculators/widgets/input_header_text.dart';
 import 'package:meal_mate/features/calculators/widgets/result_dialog.dart';
 
 class InputScreen extends StatefulWidget {

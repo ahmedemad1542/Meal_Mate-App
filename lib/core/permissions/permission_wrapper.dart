@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meal_mate/core/permissions/permission_handler.dart';
 import 'package:meal_mate/features/home_screen/home_screen.dart';
 
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meal_mate/core/permissions/app_permissions.dart';
-import 'package:meal_mate/features/home_screen/home_screen.dart';
 
 class PermissionsWrapper extends StatefulWidget {
   const PermissionsWrapper({super.key});

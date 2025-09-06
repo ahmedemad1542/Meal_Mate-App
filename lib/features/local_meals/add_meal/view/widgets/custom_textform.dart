@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
-import 'package:path/path.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String label;
@@ -33,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: keyboardType,
         cursorColor: AppColors.orange,
         minLines: minLines,
-        maxLines: maxLines ?? null,
+        maxLines: maxLines,
         validator:
             validator ??
             (value) {

@@ -4,9 +4,9 @@ abstract class ThemeState {
 }
 
 class ThemeInitial extends ThemeState {
-  const ThemeInitial(bool isDarkMode) : super(isDarkMode);
+  const ThemeInitial(super.isDarkMode);
 }
 
 class ThemeChanged extends ThemeState {
-  const ThemeChanged(bool isDarkMode) : super(isDarkMode);
+  const ThemeChanged(super.isDarkMode);
 }

@@ -9,7 +9,7 @@ import 'package:meal_mate/features/settings/widgets/custom_switch.dart';
 import 'package:meal_mate/core/theming/custom_colors.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("settings".tr()),
         elevation: 0,
-        backgroundColor: colors.background,
+        backgroundColor: colors.surface,
         foregroundColor: Theme.of(context).textTheme.bodyLarge?.color,
       ),
       body: Padding(
@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: colors.areaCardBackground, // Use your custom card color
+                color: colors.areaCardBackground, 
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(

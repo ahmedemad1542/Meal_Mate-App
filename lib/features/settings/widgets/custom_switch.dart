@@ -10,14 +10,14 @@ class CustomSwitch extends StatefulWidget {
   final Color? inactiveColor;
 
   const CustomSwitch({
-    Key? key,
+    super.key,
     required this.isOn,
     required this.leftText,
     required this.rightText,
     required this.onToggle,
     this.activeColor,
     this.inactiveColor,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomSwitch> createState() => _CustomSwitchState();

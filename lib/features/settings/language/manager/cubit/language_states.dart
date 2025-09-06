@@ -4,9 +4,9 @@ abstract class LanguageState {
 }
 
 class LanguageInitial extends LanguageState {
-  const LanguageInitial(String languageCode) : super(languageCode);
+  const LanguageInitial(super.languageCode);
 }
 
 class LanguageChanged extends LanguageState {
-  const LanguageChanged(String languageCode) : super(languageCode);
+  const LanguageChanged(super.languageCode);
 }

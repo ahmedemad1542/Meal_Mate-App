@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_mate/features/online_meals/area_feature/data/repo/area_repo.dart';
 import 'package:meal_mate/features/online_meals/area_feature/manager/cubit/area_state.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/repo/area_repo.dart'; // Import the repo
+// Import the repo
 // Import your model if needed
 
 class AreaCubit extends Cubit<AreaState> {

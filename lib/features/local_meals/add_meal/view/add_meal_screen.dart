@@ -16,7 +16,7 @@ import 'package:meal_mate/features/local_meals/add_meal/view/widgets/custom_appb
 import 'package:meal_mate/features/local_meals/add_meal/view/widgets/save_meal_button.dart';
 
 class AddMealScreen extends StatefulWidget {
-  AddMealScreen({super.key});
+  const AddMealScreen({super.key});
 
   @override
   State<AddMealScreen> createState() => _AddMealScreenState();

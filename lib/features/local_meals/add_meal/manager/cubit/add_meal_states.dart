@@ -1,4 +1,3 @@
-import 'package:meal_mate/core/model/meal_model.dart';
 
 abstract class AddMealState {}
 

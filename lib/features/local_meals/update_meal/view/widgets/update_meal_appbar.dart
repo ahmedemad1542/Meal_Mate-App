@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:meal_mate/core/theming/app_colors.dart';
 
 class UpdateMealAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const UpdateMealAppBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
