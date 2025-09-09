@@ -1,7 +1,9 @@
-# Meal Mate
+# Meal Mate 🍽️
 [![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/ahmedemad1542/Meal_Mate-App)
 
 Meal Mate is a comprehensive meal and recipe management application built with Flutter. It allows users to save personal recipes, discover new meals from around the world, and get intelligent recipe suggestions from an AI-powered cooking assistant. The app also includes handy health calculators to help users track their fitness goals.
+
+---
 
 ## ✨ Features
 
@@ -14,9 +16,13 @@ Meal Mate is a comprehensive meal and recipe management application built with F
   - **Language**: Full support for both English and Arabic.
 - **User-Friendly Interface**: A clean, responsive UI built with an intuitive navigation system.
 
+---
+
 ## 🏛️ Architecture
 
 The project follows a feature-first architecture, separating core functionalities from distinct feature modules. This approach promotes modularity, scalability, and easier maintenance. Each feature (e.g., `chat_bot`, `local_meals`, `online_meals`) is self-contained with its own data, repository, and presentation layers, using the BLoC pattern for state management.
+
+---
 
 ## 🛠️ Technology Stack
 
@@ -30,6 +36,8 @@ The project follows a feature-first architecture, separating core functionalitie
 - **Permissions**: `permission_handler`
 - **UI Toolkit**: `flutter_screenutil`
 
+---
+
 ## ⚙️ Configuration
 
 This project requires an API key for the ChefBot feature to function.
@@ -41,13 +49,15 @@ This project requires an API key for the ChefBot feature to function.
     GROQ_API_KEY=your_groq_api_key_here
     ```
 
+---
+
 ## 🚀 Getting Started
 
 To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
--   Flutter SDK installed on your machine. You can find instructions [here](https://flutter.dev/docs/get-started/install).
+- Flutter SDK installed on your machine. You can find instructions [here](https://flutter.dev/docs/get-started/install).
 
 ### Installation
 
@@ -71,3 +81,16 @@ To get a local copy up and running, follow these simple steps.
 6.  Run the app:
     ```sh
     flutter run
+    ```
+
+---
+
+## 📦 Releases
+
+You can download the latest APK from the [Releases page](https://github.com/ahmedemad1542/Meal_Mate-App/releases).
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
