@@ -1,5 +1,8 @@
 # Meal Mate 🍽️
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Flutter](https://img.shields.io/badge/Flutter-3.22-blue.svg?logo=flutter)
+![GitHub stars](https://img.shields.io/github/stars/ahmedemad1542/Meal_Mate-App?style=social)
+
 [![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/ahmedemad1542/Meal_Mate-App)
 
 Meal Mate is a comprehensive meal and recipe management application built with Flutter. It allows users to save personal recipes, discover new meals from around the world, and get intelligent recipe suggestions from an AI-powered cooking assistant. The app also includes handy health calculators to help users track their fitness goals.
